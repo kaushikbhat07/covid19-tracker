@@ -41,7 +41,7 @@ class HomeTable extends Component {
 			);
 
 		$(document).ready(function () {
-			$('.controlRow__root .form-control').attr("placeholder", "Search...");
+			$('.controlRow__root .form-control').attr("placeholder", "Search for a country...");
 			$('table').addClass('table-responsive table-bordered text-center');
 			$('.controlRow__root .col-sm-2').removeClass('col-sm-2').addClass('col-md-6');
 			$('.controlRow__root .col-sm-4').removeClass('col-sm-4').addClass('col-md-6');

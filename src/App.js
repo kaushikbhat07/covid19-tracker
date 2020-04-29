@@ -4,6 +4,7 @@ import Footer from './components/footer';
 import Numbers from './components/numbers';
 import PieChart from './components/PieChart';
 import HomeTable from './components/hometable';
+import TopFive from './components/topfive';
 import './App.css';
 
 class App extends Component {
@@ -48,7 +49,7 @@ class App extends Component {
 								<HomeTable />
 							</div>
 							<div className="col-md-4">
-								<PieChart />
+								<TopFive />
 							</div>
 						</div>
 					</div>

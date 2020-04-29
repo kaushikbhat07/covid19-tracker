@@ -1,15 +1,92 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import { Bar, Pie } from 'react-chartjs-2';
 
 class PieChart extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = ({
+			chartOptions: {
+				maintainAspectRatio: false,
+				title: {
+					display: true,
+					text: 'Global effect from Covid-19',
+					fontSize: 20
+				},
+				legend: {
+					display: true,
+					position: 'top'
+				}
+			},
+			worldwide: {
+				isLoaded: false,
+				error: null
+			}
+		});
+	};
+
+	componentDidMount() {
+		fetch("https://api.covid19api.com/summary")
+			.then(res => res.json())
+			.then(
+				result => {
+					if(result['Global'] !== undefined) {
+						this.setState({
+							data: {
+								labels: ["Confirmed Cases", "Total Deaths", "Total Recovered"],
+								datasets: [{
+									label: "Global effect from Covid-19",
+									backgroundColor: ['#007bff', '#f70c0c', '#28a745'],
+									hoverBackgroundColor: ['#1d3557', '#d90429', '#134611'],
+									borderColor: '#fff',
+									data: [result['Global']['TotalConfirmed'], result['Global']['TotalDeaths'], result['Global']['TotalRecovered']]
+								}]
+							},
+							worldwide: {
+								isLoaded: true
+							}
+						});
+					}
+				},
+				error => {
+					this.setState({
+						worldwide: {
+							isLoaded: true,
+							error: error
+						}
+					});
+				}
+			);
+	}
+
+	printChart() {
+		if (this.state.worldwide.isLoaded === true) {
+			return (
+				<Pie data={this.state.data} options={this.state.chartOptions} height={303} />
+			);
+		} else if (this.state.worldwide.isLoaded === false && this.state.worldwide.error === null) {
+			return (
+				<div className="text-center">
+					<img alt="Loading..." src="assets/images/loader.gif" />
+				</div>
+			);
+		} else if(this.state.worldwide.isLoaded === true && this.state.worldwide.error !== null) {
+			return(
+				<div className="text-center">
+					<i className="fa fa-exclamation-triangle"></i>
+				</div>
+			);
+		}
+	}
+
 	render() {
 		return (
 			<React.Fragment>
 				<Card className="shadow">
 					<CardBody>
-						<CardTitle>Piechart</CardTitle>
 						<CardText>
-							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente incidunt veniam mollitia consequatur beatae libero rem perferendis perspiciatis nam deserunt adipisci, doloremque dolores esse pariatur et cumque! Dicta, iure aliquam?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor unde quia iure blanditiis eum, ullam commodi. Voluptas odit voluptatem, obcaecati autem id quisquam tempore, quae saepe ab quia ea molestias?Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum aliquid adipisci a voluptatum debitis qui ut nesciunt id necessitatibus dolore, error ducimus deserunt explicabo! Dolorum ad ratione incidunt laborum corrupti?
+							{this.printChart()}
 						</CardText>
 					</CardBody>
 				</Card>
