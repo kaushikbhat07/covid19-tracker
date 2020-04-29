@@ -31,9 +31,9 @@ class TopNav extends Component {
 							<NavItem>
 								<NavLink href=""><i className="fa fa-home"></i></NavLink>
 							</NavItem>
-							<NavItem>
+							{/* <NavItem>
 								<NavLink href=""><i className="fa fa-home"></i></NavLink>
-							</NavItem>
+							</NavItem> */}
 						</Nav>
 					</Collapse>
 					{/* <div className="last-updated ml-auto">

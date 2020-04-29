@@ -13,6 +13,14 @@ code {
 }
 
 /* CUSTOM */
+@media screen and (max-width: 450px) {
+	.container-wrapper {
+		padding-left: initial;
+		padding-right: initial;
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+}
 #app {
 	width: 100%;
 	height: 100%;

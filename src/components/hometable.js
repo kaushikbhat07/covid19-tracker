@@ -57,7 +57,7 @@ class HomeTable extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="mb-4">
 				<h3 className="all-country-title">All Countries</h3>
 				<Card className="shadow">
 					<CardBody>

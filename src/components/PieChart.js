@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
-import { Bar, Pie } from 'react-chartjs-2';
+import { Card, CardBody, CardText } from 'reactstrap';
+import { Pie } from 'react-chartjs-2';
 
 class PieChart extends Component {
 	constructor(props) {
@@ -52,7 +52,7 @@ class PieChart extends Component {
 				error => {
 					this.setState({
 						worldwide: {
-							isLoaded: true,
+							isLoaded: false,
 							error: error
 						}
 					});
@@ -71,7 +71,7 @@ class PieChart extends Component {
 					<img alt="Loading..." src="assets/images/loader.gif" />
 				</div>
 			);
-		} else if(this.state.worldwide.isLoaded === true && this.state.worldwide.error !== null) {
+		} else if(this.state.worldwide.isLoaded === false && this.state.worldwide.error !== null) {
 			return(
 				<div className="text-center">
 					<i className="fa fa-exclamation-triangle"></i>
