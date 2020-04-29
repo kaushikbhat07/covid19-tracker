@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardText } from 'reactstrap';
+import { Card, CardBody, CardText, CardTitle } from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
 
 class TopFive extends Component {
@@ -11,7 +11,7 @@ class TopFive extends Component {
 				maintainAspectRatio: false,
 				title: {
 					display: true,
-					text: 'Top 5 nations affected',
+					text: 'Confirmed cases',
 					fontSize: 20
 				},
 				legend: {
@@ -44,9 +44,9 @@ class TopFive extends Component {
 							data: {
 								labels: [result['Countries'][0]['Country'], result['Countries'][1]['Country'], result['Countries'][2]['Country'], result['Countries'][3]['Country'], result['Countries'][4]['Country']],
 								datasets: [{
-									label: "Top 5 nations affected",
-									backgroundColor: ['#662e9b', '#43bccd', '#ea3546', '#f86624', '#f9c80e'],
-									hoverBackgroundColor: ['#4D2082','#2F8A99', '#BB2531', '#C34719', '#BD8C0A'],
+									label: "Top 5 nations confirmed cases",
+									backgroundColor: ['#662e9b', '#43bccd', '#538d22', '#ff5400', '#f9c80e'],
+									hoverBackgroundColor: ['#4D2082','#2F8A99', '#1a4301', '#DC4300', '#BD8C0A'],
 									borderColor: '#fff',
 									data: [result['Countries'][0]['TotalConfirmed'], result['Countries'][1]['TotalConfirmed'], result['Countries'][2]['TotalConfirmed'], result['Countries'][3]['TotalConfirmed'], result['Countries'][4]['TotalConfirmed']]
 								}]
@@ -93,7 +93,7 @@ class TopFive extends Component {
 			<React.Fragment>
 				<Card className="shadow">
 					<CardBody>
-						{/* <CardTitle>Piechart</CardTitle> */}
+						<CardTitle className="text-uppercase text-center">Top 5 nations affected</CardTitle>
 						<CardText>
 							{this.printChart()}
 						</CardText>

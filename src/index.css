@@ -42,6 +42,7 @@ code {
 table {
 	width: 100%;
 	height: 543px;
+	background-color: #d3d3d3;
 }
 .social-icon-wrapper {
 	display: flex;

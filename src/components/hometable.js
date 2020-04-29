@@ -46,9 +46,11 @@ class HomeTable extends Component {
 			$('.controlRow__root .col-sm-2').removeClass('col-sm-2').addClass('col-md-6');
 			$('.controlRow__root .col-sm-4').removeClass('col-sm-4').addClass('col-md-6');
 			$('.controlRow__root .col-sm-6').removeClass('text-right col-sm-6').addClass('col-md-12 text-center mt-4');
+			$('table').addClass('table-borderless');
+			// $('table .thead-tr').addClass('bg-danger');
 			$('table .thead-tr td:nth-child(3)').addClass('text-danger');
 			$('table .thead-tr td:nth-child(4)').addClass('text-success');
-			$('table .thead-tr td:nth-child(2)').addClass('text-warning');
+			$('table .thead-tr td:nth-child(2)').addClass('text-primary');
 			$('table .thead-tr td:nth-child(1)').addClass('text-dark');
 			$('.controlRow__root .input-group-append').remove();
 			$('.paginationOpts__root .form-group').addClass('m-auto text-center');
