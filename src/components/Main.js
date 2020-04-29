@@ -1,42 +1,22 @@
 import React, { Component } from 'react';
 import Header from './header';
 import Footer from './footer';
-import Numbers from './numbers';
-import PieChart from './PieChart';
-import HomeTable from './hometable';
-import TopFive from './topfive';
+import Home from './HomePage';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 
 class Main extends Component {
 	render() {
 		return (
-			<React.Fragment>
+			<div>
 				<Header />
-				<div className="container container-wrapper mt-4">
-					<div className="content-box-md">
-						<div className="row">
-							<div className="col-md-8">
-								<Numbers />
-							</div>
-							<div className="col-md-4">
-								<PieChart />
-							</div>
-						</div>
-					</div>
-					<div className="content-box-md">
-						<div className="row">
-							<div className="col-md-8">
-								<HomeTable />
-							</div>
-							<div className="col-md-4">
-								<TopFive />
-							</div>
-						</div>
-					</div>
-				</div>
+				<Switch location={this.props.location}>
+					<Route path='/home' component={Home} />
+					<Redirect to="/home" />
+				</Switch>
 				<Footer />
-			</React.Fragment>
+			</div>
 		);
 	}
 }
 
-export default Main;
+export default withRouter(Main);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Collapse } from 'reactstrap';
+import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, Collapse } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 
 class TopNav extends Component {
 	constructor(props) {
@@ -29,10 +30,10 @@ class TopNav extends Component {
 					<Collapse isOpen={this.state.isNavOpen} navbar center>
 						<Nav className="m-auto text-center" navbar>
 							<NavItem>
-								<NavLink href=""><i className="fa fa-home"></i></NavLink>
+								<NavLink className="nav-link" to="/home"><span className="fa fa-home"></span></NavLink>
 							</NavItem>
 							{/* <NavItem>
-								<NavLink href=""><i className="fa fa-home"></i></NavLink>
+								<NavLink className="nav-link" to='/about'><span className="fa fa-info fa-sm"></span> About Us</NavLink>
 							</NavItem> */}
 						</Nav>
 					</Collapse>
