@@ -60,10 +60,11 @@ table {
 	display: inherit;
 }
 .thead {
-	position: -webkit-sticky;
 	position: sticky;
+	position: -webkit-sticky;
 	top: 0;
 	left: 0;
+	right: 0;
 	background-color: #eceaea;;
 }
 #loader {

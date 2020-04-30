@@ -30,14 +30,11 @@ class TopNav extends Component {
 							<NavItem>
 								<NavLink className="nav-link" to="/home"><span className="fa fa-home"></span></NavLink>
 							</NavItem>
-							{/* <NavItem>
-								<NavLink className="nav-link" to='/about'><span className="fa fa-info fa-sm"></span> About Us</NavLink>
-							</NavItem> */}
+							<NavItem>
+								<NavLink className="nav-link" to="/home"><span className="fa fa-info-circle"></span></NavLink>
+							</NavItem>
 						</Nav>
 					</Collapse>
-					{/* <div className="last-updated ml-auto">
-						<span>Last updated 13 minutes ago</span>
-					</div> */}
 				</Navbar>
 			</div>
 		);

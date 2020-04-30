@@ -50,6 +50,7 @@ class Numbers extends Component {
 						if (param['Slug'] === "india") {
 							indiaArr = param;
 						}
+						return 1;
 					})
 					this.setState({
 						india: {

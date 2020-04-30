@@ -34,7 +34,7 @@ class HomeTable extends Component {
 				},
 				error => {
 					this.setState({
-						isLoaded: true,
+						isLoaded: false,
 						error: error
 					});
 				}
@@ -58,11 +58,31 @@ class HomeTable extends Component {
 	}
 
 	render() {
+		const loader = () => {
+			if(this.state.isLoaded === false && this.state.error === null) {
+				return (
+					<div className="text-center">
+						<img width="70" height="70" src="assets/images/loader.gif" alt="Loading..."/>
+					</div>
+				);
+			} else if(this.state.isLoaded === false && this.state.error !== null) {
+				return (
+					<div className="text-center">
+						<i className="fa fa-exclamation-triangle"></i>
+					</div>
+				);
+			} else {
+				return (
+					<div></div>
+				);				
+			}
+		}
 		return (
 			<div className="mb-4">
 				<h3 className="all-country-title">All Countries</h3>
 				<Card className="shadow">
 					<CardBody>
+						{loader()}
 						<Datatable
 							tableHeaders={this.header}
 							tableBody={this.state.items}
@@ -70,7 +90,7 @@ class HomeTable extends Component {
 							tableClass="striped hover table-responsive"
 							rowsPerPage={10}
 							rowsPerPageOption={[7, 10, 25, 50, 100, 200, 500]}
-							// initialSort={{ prop: 'TotalConfirmed TotalDeaths', isAscending: false }}
+						// initialSort={{ prop: 'TotalConfirmed TotalDeaths', isAscending: false }}
 						/>
 					</CardBody>
 				</Card>

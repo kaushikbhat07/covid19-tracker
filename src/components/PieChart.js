@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardText } from 'reactstrap';
 import { Pie } from 'react-chartjs-2';
-
 class PieChart extends Component {
 	constructor(props) {
 		super(props);
@@ -26,12 +25,12 @@ class PieChart extends Component {
 		});
 	};
 
-	componentDidMount() {
+	fetchData() {
 		fetch("https://api.covid19api.com/summary")
 			.then(res => res.json())
 			.then(
 				result => {
-					if(result['Global'] !== undefined) {
+					if (result['Global'] !== undefined) {
 						this.setState({
 							data: {
 								labels: ["Confirmed Cases", "Total Deaths", "Total Recovered"],
@@ -60,6 +59,10 @@ class PieChart extends Component {
 			);
 	}
 
+	componentDidMount() {
+		this.fetchData();
+	}
+
 	printChart() {
 		if (this.state.worldwide.isLoaded === true) {
 			return (
@@ -71,8 +74,8 @@ class PieChart extends Component {
 					<img alt="Loading..." src="assets/images/loader.gif" />
 				</div>
 			);
-		} else if(this.state.worldwide.isLoaded === false && this.state.worldwide.error !== null) {
-			return(
+		} else if (this.state.worldwide.isLoaded === false && this.state.worldwide.error !== null) {
+			return (
 				<div className="text-center">
 					<i className="fa fa-exclamation-triangle"></i>
 				</div>
