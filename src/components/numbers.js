@@ -45,20 +45,16 @@ class Numbers extends Component {
 			.then(res => res.json())
 			.then(
 				result => {
-					var arr = [];
-					// for (let index = 0; index < result['Countries'].length; index++) {
-					// arr = result['Countries'].filter((param) => param['Slug'] === "india")
-					// }
+					var indiaArr = [];
 					result['Countries'].filter((param) => {
 						if (param['Slug'] === "india") {
-							console.log("MATCHED!!!");
-							arr = param;
+							indiaArr = param;
 						}
 					})
 					this.setState({
 						india: {
 							isLoaded: true,
-							items: arr,
+							items: indiaArr,
 							time: this.state.india.items['Date']
 						}
 					});
@@ -92,7 +88,7 @@ class Numbers extends Component {
 		const totalInfectedGlobal = () => {
 			if (this.state.worldwide.isLoaded === true && this.state.worldwide.items !== undefined) {
 				return (
-					this.state.worldwide.items['TotalConfirmed']
+					this.state.worldwide.items['TotalConfirmed'].toLocaleString()
 				);
 			} else if (this.state.worldwide.error) {
 				return (
@@ -107,7 +103,7 @@ class Numbers extends Component {
 		const totalRecoveredGlobal = () => {
 			if (this.state.worldwide.isLoaded === true && this.state.worldwide.items !== undefined) {
 				return (
-					this.state.worldwide.items['TotalRecovered']
+					this.state.worldwide.items['TotalRecovered'].toLocaleString()
 				);
 			} else if (this.state.worldwide.error) {
 				return (
@@ -122,7 +118,7 @@ class Numbers extends Component {
 		const totalDeadGlobal = () => {
 			if (this.state.worldwide.isLoaded === true && this.state.worldwide.items !== undefined) {
 				return (
-					this.state.worldwide.items['TotalDeaths']
+					this.state.worldwide.items['TotalDeaths'].toLocaleString()
 				);
 			} else if (this.state.worldwide.error) {
 				return (
@@ -137,7 +133,7 @@ class Numbers extends Component {
 		const totalDeadIndia = () => {
 			if (this.state.india.isLoaded === true && this.state.india.items !== undefined) {
 				return (
-					this.state.india.items['TotalDeaths']
+					this.state.india.items['TotalDeaths'].toLocaleString()
 				);
 			} else if (this.state.worldwide.error) {
 				return (
@@ -152,7 +148,7 @@ class Numbers extends Component {
 		const totalReceoveredIndia = () => {
 			if (this.state.india.isLoaded === true && this.state.india.items !== undefined) {
 				return (
-					this.state.india.items['TotalRecovered']
+					this.state.india.items['TotalRecovered'].toLocaleString()
 				);
 			} else if (this.state.worldwide.error) {
 				return (
@@ -167,7 +163,7 @@ class Numbers extends Component {
 		const totalInfectedIndia = () => {
 			if (this.state.india.isLoaded === true && this.state.india.items !== undefined) {
 				return (
-					this.state.india.items['TotalConfirmed']
+					this.state.india.items['TotalConfirmed'].toLocaleString()
 				);
 			} else if (this.state.worldwide.error) {
 				return (
