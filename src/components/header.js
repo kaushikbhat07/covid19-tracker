@@ -20,7 +20,7 @@ class TopNav extends Component {
 
 		return (
 			<div>
-				<Navbar color="light" light expand="md" className="shadow">
+				<Navbar color="light" light expand="md" className="shadow fixed-top">
 					<NavbarBrand href="">
 						<img src="assets/images/logo.png" alt="Covid-19 Logo" />
 					</NavbarBrand>

@@ -45,11 +45,20 @@ class Numbers extends Component {
 			.then(res => res.json())
 			.then(
 				result => {
-					
+					var arr = [];
+					// for (let index = 0; index < result['Countries'].length; index++) {
+					// arr = result['Countries'].filter((param) => param['Slug'] === "india")
+					// }
+					result['Countries'].filter((param) => {
+						if (param['Slug'] === "india") {
+							console.log("MATCHED!!!");
+							arr = param;
+						}
+					})
 					this.setState({
 						india: {
 							isLoaded: true,
-							items: result['Countries'][101],
+							items: arr,
 							time: this.state.india.items['Date']
 						}
 					});
@@ -187,7 +196,7 @@ class Numbers extends Component {
 										<div class="h5 mb-0 font-weight-bold text-primary">
 											{totalInfectedGlobal()}
 										</div>
-									</div>								
+									</div>
 								</div>
 							</div>
 						</div>
