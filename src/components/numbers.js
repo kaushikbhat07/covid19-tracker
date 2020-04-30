@@ -45,6 +45,7 @@ class Numbers extends Component {
 			.then(res => res.json())
 			.then(
 				result => {
+					
 					this.setState({
 						india: {
 							isLoaded: true,
