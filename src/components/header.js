@@ -31,7 +31,7 @@ class TopNav extends Component {
 								<NavLink className="nav-link" to="/home"><span className="fa fa-home"></span></NavLink>
 							</NavItem>
 							<NavItem>
-								<NavLink className="nav-link" to="/home"><span className="fa fa-info-circle"></span></NavLink>
+								<NavLink className="nav-link" to="/about"><span className="fa fa-info-circle"></span></NavLink>
 							</NavItem>
 						</Nav>
 					</Collapse>
