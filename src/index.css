@@ -64,3 +64,6 @@ code {
 	margin-top: -76px;
 	margin-left: -76px;
 }
+.controlRow__root {
+	position: -webkit-sticky
+}

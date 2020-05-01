@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardText, CardTitle } from 'reactstrap';
-import { Doughnut } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 
-class TopFive extends Component {
+class TopFiveBarChart extends Component {
 	constructor(props) {
 		super(props);
 
@@ -16,7 +16,7 @@ class TopFive extends Component {
 				},
 				legend: {
 					display: true,
-					position: 'top'
+					position: 'bottom'
 				}
 			}
 		});
@@ -25,7 +25,7 @@ class TopFive extends Component {
 	printChart() {
 		if (this.props.isLoaded === true) {
 			return (
-				<Doughnut data={this.props.data} options={this.state.chartOptions} height={380} />
+				<Bar data={this.props.data} options={this.state.chartOptions} height={235} />
 			);
 		} else if (this.props.isLoaded === false && this.props.error === null) {
 			return (
@@ -46,7 +46,6 @@ class TopFive extends Component {
 		return (
 			<React.Fragment>
 				<div className="mb-4">
-					<h3 className="all-country-title">Most effected Nations</h3>
 					<Card className="shadow">
 						<CardBody>
 							<CardText>
@@ -60,4 +59,4 @@ class TopFive extends Component {
 	}
 }
 
-export default TopFive;
+export default TopFiveBarChart;

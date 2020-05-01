@@ -3,6 +3,7 @@ import Numbers from './numbers';
 import PieChart from './PieChart';
 import HomeTable from './hometable';
 import TopFive from './topfive';
+import TopFiveBarChart from './TopFiveBarChart';
 
 class HomePage extends Component {
 	constructor(props) {
@@ -31,6 +32,10 @@ class HomePage extends Component {
 			topfive: {
 				isLoaded: false,
 				error: null
+			},
+			topfivebarchart: {
+				isLoaded: false,
+				error: null
 			}
 		}
 	}
@@ -47,8 +52,8 @@ class HomePage extends Component {
 						var topfiveSortedArr = [];
 						topfiveSortedArr = result['Countries'].slice();
 						topfiveSortedArr.sort(
-							function(a, b) {
-								return b['TotalConfirmed'] - a['TotalConfirmed'];								
+							function (a, b) {
+								return b['TotalConfirmed'] - a['TotalConfirmed'];
 							}
 						);
 						var indiaArr = [];
@@ -57,7 +62,7 @@ class HomePage extends Component {
 								indiaArr = param;
 							}
 							return 1;
-						})						
+						})
 					}
 					this.setState({
 						worldwide: {
@@ -91,11 +96,39 @@ class HomePage extends Component {
 								datasets: [{
 									label: "Top 5 nations confirmed cases",
 									backgroundColor: ['#662e9b', '#43bccd', '#538d22', '#ff5400', '#f9c80e'],
-									hoverBackgroundColor: ['#4D2082','#2F8A99', '#1a4301', '#DC4300', '#BD8C0A'],
+									hoverBackgroundColor: ['#4D2082', '#2F8A99', '#1a4301', '#DC4300', '#BD8C0A'],
 									borderColor: '#fff',
 									data: [topfiveSortedArr[0]['TotalConfirmed'], topfiveSortedArr[1]['TotalConfirmed'], topfiveSortedArr[2]['TotalConfirmed'], topfiveSortedArr[3]['TotalConfirmed'], topfiveSortedArr[4]['TotalConfirmed']]
 								}]
-							},							
+							},
+							isLoaded: true
+						},
+						topfivebarchart: {
+							data: {
+								labels: [topfiveSortedArr[0]['CountryCode'], topfiveSortedArr[1]['Country'], topfiveSortedArr[2]['CountryCode'], topfiveSortedArr[3]['Country'], topfiveSortedArr[4]['Country']],
+								datasets: [{
+									label: ['Confirmed cases'],
+									backgroundColor: ['#1d3557', '#1d3557', '#1d3557', '#1d3557', '#1d3557'],
+									hoverBackgroundColor: ['#007bff', '#007bff', '#007bff', '#007bff', '#007bff',],
+									borderColor: '#000',
+									data: [topfiveSortedArr[0]['TotalConfirmed'], topfiveSortedArr[1]['TotalConfirmed'], topfiveSortedArr[2]['TotalConfirmed'], topfiveSortedArr[3]['TotalConfirmed'], topfiveSortedArr[4]['TotalConfirmed']]
+								},
+								{
+									label: ['Death cases'],
+									backgroundColor: ['#d90429', '#d90429', '#d90429', '#d90429', '#d90429'],
+									hoverBackgroundColor: ['#d90429', '#d90429', '#d90429', '#d90429', '#d90429'],
+									borderColor: '#000',
+									data: [topfiveSortedArr[0]['TotalDeaths'], topfiveSortedArr[1]['TotalDeaths'], topfiveSortedArr[2]['TotalDeaths'], topfiveSortedArr[3]['TotalDeaths'], topfiveSortedArr[4]['TotalDeaths']]
+								},
+								{
+									label: ['Recovery Cases'],
+									backgroundColor: ['#134611', '#134611', '#134611', '#134611', '#134611'],
+									hoverBackgroundColor: ['#28a745', '#28a745', '#28a745', '#28a745', '#28a745'],
+									borderColor: '#000',
+									data: [topfiveSortedArr[0]['TotalRecovered'], topfiveSortedArr[1]['TotalRecovered'], topfiveSortedArr[2]['TotalRecovered'], topfiveSortedArr[3]['TotalRecovered'], topfiveSortedArr[4]['TotalRecovered']]
+								}								
+								]
+							},
 							isLoaded: true
 						}
 					});
@@ -121,6 +154,10 @@ class HomePage extends Component {
 							error: error
 						},
 						topfive: {
+							isLoaded: false,
+							error: error
+						},
+						topfivebarchart: {
 							isLoaded: false,
 							error: error
 						}
@@ -151,7 +188,9 @@ class HomePage extends Component {
 							<HomeTable items={this.state.hometable.items} isLoaded={this.state.hometable.isLoaded} error={this.state.hometable.error} />
 						</div>
 						<div className="col-md-4">
-							<TopFive  isLoaded={this.state.topfive.isLoaded} error={this.state.topfive.error} data={this.state.topfive.data} />
+							<TopFive isLoaded={this.state.topfive.isLoaded} error={this.state.topfive.error} data={this.state.topfive.data} />
+
+							<TopFiveBarChart isLoaded={this.state.topfivebarchart.isLoaded} error={this.state.topfivebarchart.error} data={this.state.topfivebarchart.data} />
 						</div>
 					</div>
 				</div>
