@@ -27,6 +27,10 @@ class HomePage extends Component {
 				isLoaded: false,
 				error: null,
 				items: ["-", "-", "-", "-"]
+			},
+			topfive: {
+				isLoaded: false,
+				error: null
 			}
 		}
 	}
@@ -39,13 +43,22 @@ class HomePage extends Component {
 			.then(res => res.json())
 			.then(
 				result => {
-					var indiaArr = [];
-					result['Countries'].filter((param) => {
-						if (param['Slug'] === "india") {
-							indiaArr = param;
-						}
-						return 1;
-					})
+					if (result['Countries'] !== undefined) {
+						var topfiveSortedArr = [];
+						topfiveSortedArr = result['Countries'].slice();
+						topfiveSortedArr.sort(
+							function(a, b) {
+								return b['TotalConfirmed'] - a['TotalConfirmed'];								
+							}
+						);
+						var indiaArr = [];
+						result['Countries'].filter((param) => {
+							if (param['Slug'] === "india") {
+								indiaArr = param;
+							}
+							return 1;
+						})						
+					}
 					this.setState({
 						worldwide: {
 							isLoaded: true,
@@ -71,6 +84,19 @@ class HomePage extends Component {
 						hometable: {
 							isLoaded: true,
 							items: result['Countries']
+						},
+						topfive: {
+							data: {
+								labels: [topfiveSortedArr[0]['Country'], topfiveSortedArr[1]['Country'], topfiveSortedArr[2]['Country'], topfiveSortedArr[3]['Country'], topfiveSortedArr[4]['Country']],
+								datasets: [{
+									label: "Top 5 nations confirmed cases",
+									backgroundColor: ['#662e9b', '#43bccd', '#538d22', '#ff5400', '#f9c80e'],
+									hoverBackgroundColor: ['#4D2082','#2F8A99', '#1a4301', '#DC4300', '#BD8C0A'],
+									borderColor: '#fff',
+									data: [topfiveSortedArr[0]['TotalConfirmed'], topfiveSortedArr[1]['TotalConfirmed'], topfiveSortedArr[2]['TotalConfirmed'], topfiveSortedArr[3]['TotalConfirmed'], topfiveSortedArr[4]['TotalConfirmed']]
+								}]
+							},							
+							isLoaded: true
 						}
 					});
 				},
@@ -90,9 +116,14 @@ class HomePage extends Component {
 							error: error
 						},
 						hometable: {
+							items: ["-", "-", "-", "-"],
 							isLoaded: false,
 							error: error
-						}						
+						},
+						topfive: {
+							isLoaded: false,
+							error: error
+						}
 					});
 				}
 			);
@@ -120,7 +151,7 @@ class HomePage extends Component {
 							<HomeTable items={this.state.hometable.items} isLoaded={this.state.hometable.isLoaded} error={this.state.hometable.error} />
 						</div>
 						<div className="col-md-4">
-							<TopFive />
+							<TopFive  isLoaded={this.state.topfive.isLoaded} error={this.state.topfive.error} data={this.state.topfive.data} />
 						</div>
 					</div>
 				</div>
