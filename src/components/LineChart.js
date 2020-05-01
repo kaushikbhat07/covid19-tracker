@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardText } from 'reactstrap';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 class TopFiveBarChart extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class TopFiveBarChart extends Component {
                 maintainAspectRatio: false,
                 title: {
                     display: true,
-                    text: 'Global ratio (Top 5)',
+                    text: 'Global ratio (Top 10)',
                     fontSize: 18
                 },
                 legend: {
@@ -25,7 +25,7 @@ class TopFiveBarChart extends Component {
     printChart() {
         if (this.props.isLoaded === true) {
             return (
-                <Bar data={this.props.data} options={this.state.chartOptions} height={500} />
+                <Line data={this.props.data} options={this.state.chartOptions} height={202} />
             );
         } else if (this.props.isLoaded === false && this.props.error === null) {
             return (

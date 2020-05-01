@@ -4,6 +4,7 @@ import PieChart from './PieChart';
 import HomeTable from './hometable';
 import TopFive from './topfive';
 import TopFiveBarChart from './TopFiveBarChart';
+import LineChart from './LineChart';
 
 class HomePage extends Component {
 	constructor(props) {
@@ -34,6 +35,10 @@ class HomePage extends Component {
 				error: null
 			},
 			topfivebarchart: {
+				isLoaded: false,
+				error: null
+			},
+			linechart: {
 				isLoaded: false,
 				error: null
 			}
@@ -126,7 +131,41 @@ class HomePage extends Component {
 									hoverBackgroundColor: ['#28a745', '#28a745', '#28a745', '#28a745', '#28a745'],
 									borderColor: '#000',
 									data: [topfiveSortedArr[0]['TotalRecovered'], topfiveSortedArr[1]['TotalRecovered'], topfiveSortedArr[2]['TotalRecovered'], topfiveSortedArr[3]['TotalRecovered'], topfiveSortedArr[4]['TotalRecovered']]
-								}								
+								}
+								]
+							},
+							isLoaded: true
+						},
+						linechart: {
+							data: {
+								labels: [topfiveSortedArr[0]['CountryCode'], topfiveSortedArr[1]['CountryCode'], topfiveSortedArr[2]['CountryCode'], topfiveSortedArr[3]['CountryCode'], topfiveSortedArr[4]['CountryCode'], topfiveSortedArr[5]['CountryCode'], topfiveSortedArr[6]['CountryCode'], topfiveSortedArr[7]['CountryCode'], topfiveSortedArr[8]['CountryCode'], topfiveSortedArr[9]['CountryCode'], topfiveSortedArr[10]['CountryCode']],
+								datasets: [{
+									label: 'Confirmed cases',
+									fill: false,
+									lineTension: 0.5,
+									backgroundColor: ['#1d3557', '#1d3557', '#1d3557', '#1d3557', '#1d3557'],
+									hoverBackgroundColor: ['#007bff', '#007bff', '#007bff', '#007bff', '#007bff',],
+									borderColor: '#007bff',
+									data: [topfiveSortedArr[0]['TotalConfirmed'], topfiveSortedArr[1]['TotalConfirmed'], topfiveSortedArr[2]['TotalConfirmed'], topfiveSortedArr[3]['TotalConfirmed'], topfiveSortedArr[4]['TotalConfirmed'], topfiveSortedArr[5]['TotalConfirmed'], topfiveSortedArr[6]['TotalConfirmed'], topfiveSortedArr[7]['TotalConfirmed'], topfiveSortedArr[8]['TotalConfirmed'], topfiveSortedArr[9]['TotalConfirmed'], topfiveSortedArr[10]['TotalConfirmed']]
+								},
+								{
+									label: ['Death cases'],
+									fill: false,
+									lineTension: 0.5,
+									backgroundColor: ['#d90429', '#d90429', '#d90429', '#d90429', '#d90429'],
+									hoverBackgroundColor: ['#d90429', '#d90429', '#d90429', '#d90429', '#d90429'],
+									borderColor: '#d90429',
+									data: [topfiveSortedArr[0]['TotalDeaths'], topfiveSortedArr[1]['TotalDeaths'], topfiveSortedArr[2]['TotalDeaths'], topfiveSortedArr[3]['TotalDeaths'], topfiveSortedArr[4]['TotalDeaths'], topfiveSortedArr[5]['TotalDeaths'], topfiveSortedArr[6]['TotalDeaths'], topfiveSortedArr[7]['TotalDeaths'], topfiveSortedArr[8]['TotalDeaths'], topfiveSortedArr[9]['TotalDeaths'], topfiveSortedArr[10]['TotalDeaths']]
+								},
+								{
+									label: ['Recovery Cases'],
+									fill: false,
+									lineTension: 0.5,
+									backgroundColor: ['#134611', '#134611', '#134611', '#134611', '#134611'],
+									hoverBackgroundColor: ['#28a745', '#28a745', '#28a745', '#28a745', '#28a745'],
+									borderColor: '#28a745',
+									data: [topfiveSortedArr[0]['TotalRecovered'], topfiveSortedArr[1]['TotalRecovered'], topfiveSortedArr[2]['TotalRecovered'], topfiveSortedArr[3]['TotalRecovered'], topfiveSortedArr[4]['TotalRecovered'], topfiveSortedArr[5]['TotalRecovered'], topfiveSortedArr[6]['TotalRecovered'], topfiveSortedArr[7]['TotalRecovered'], topfiveSortedArr[8]['TotalRecovered'], topfiveSortedArr[9]['TotalRecovered'], topfiveSortedArr[10]['TotalRecovered']]
+								}
 								]
 							},
 							isLoaded: true
@@ -160,6 +199,10 @@ class HomePage extends Component {
 						topfivebarchart: {
 							isLoaded: false,
 							error: error
+						},
+						linechart: {
+							isLoaded: false,
+							error: error
 						}
 					});
 				}
@@ -184,8 +227,9 @@ class HomePage extends Component {
 				</div>
 				<div className="content-box-md">
 					<div className="row">
-						<div className="col-md-8">
+						<div className="col-md-8 content-box-xs">
 							<HomeTable items={this.state.hometable.items} isLoaded={this.state.hometable.isLoaded} error={this.state.hometable.error} />
+							<LineChart isLoaded={this.state.linechart.isLoaded} error={this.state.linechart.error} data={this.state.linechart.data} />
 						</div>
 						<div className="col-md-4">
 							<TopFive isLoaded={this.state.topfive.isLoaded} error={this.state.topfive.error} data={this.state.topfive.data} />

@@ -34,7 +34,12 @@ code {
 	}
 }
 .content-box-md {
-	padding-bottom: 80px;
+	padding-bottom: 48px;
+}
+@media screen and (max-width: 450px) {
+	.content-box-xs {
+		padding-bottom: 48px;
+	}
 }
 .all-country-title {
 	margin-bottom: 25px;

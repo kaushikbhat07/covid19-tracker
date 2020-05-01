@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardText, CardTitle } from 'reactstrap';
+import { Card, CardBody, CardText } from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
 
 class TopFive extends Component {
@@ -11,7 +11,7 @@ class TopFive extends Component {
 				maintainAspectRatio: false,
 				title: {
 					display: true,
-					text: 'Confirmed cases',
+					text: 'Confirmed cases (Top 5)',
 					fontSize: 18
 				},
 				legend: {
