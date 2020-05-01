@@ -9,36 +9,16 @@ class HomeTable extends Component {
 		super(props);
 
 		this.state = {
-			error: null,
-			isLoaded: false,
-			items: []
+			header: [
+				{ title: "Country", prop: "Country", sortable: true, filterable: true },
+				{ title: "Confirmed", prop: "TotalConfirmed", sortable: true, filterable: true },
+				{ title: "Deaths", prop: "TotalDeaths", sortable: true, filterable: true },
+				{ title: "Recovered", prop: "TotalRecovered", sortable: true, filterable: true }
+			]
 		};
-
-		this.header = [
-			{ title: "Country", prop: "Country", sortable: true, filterable: true },
-			{ title: "Confirmed", prop: "TotalConfirmed", sortable: true, filterable: true },
-			{ title: "Deaths", prop: "TotalDeaths", sortable: true, filterable: true },
-			{ title: "Recovered", prop: "TotalRecovered", sortable: true, filterable: true }
-		];
 	}
 
 	componentDidMount() {
-		fetch("https://api.covid19api.com/summary")
-			.then(res => res.json())
-			.then(
-				result => {
-					this.setState({
-						isLoaded: true,
-						items: result['Countries']
-					});
-				},
-				error => {
-					this.setState({
-						isLoaded: false,
-						error: error
-					});
-				}
-			);
 
 		$(document).ready(function () {
 			$('.controlRow__root .form-control').attr("placeholder", "Search for a country...");
@@ -54,27 +34,28 @@ class HomeTable extends Component {
 			$('table .thead-tr td:nth-child(1)').addClass('text-dark');
 			$('.controlRow__root .input-group-append').remove();
 			$('.paginationOpts__root .form-group').addClass('m-auto text-center');
+			// CSS
+			$('.controlRow__root').css({ "margin-bottom": "20px" });
+			$('table').css({ "width": "100%", "height": "543px", "background-color": "#eceaea", "position": "relative" });
+			$('.controlRow__root .btn-group').css({ "display": "inherit" });
+			$('.thead').css({ "position": "sticky", "position": "-webkit-sticky", "top": "0", "left": "0", "right": "0", "background-color": "#eceaea" });
 		});
 	}
 
 	render() {
 		const loader = () => {
-			if(this.state.isLoaded === false && this.state.error === null) {
-				return (
-					<div className="text-center">
-						<img width="70" height="70" src="assets/images/loader.gif" alt="Loading..."/>
-					</div>
-				);
-			} else if(this.state.isLoaded === false && this.state.error !== null) {
+			if (this.props.isLoaded === false && this.props.error !== null) {
 				return (
 					<div className="text-center">
 						<i className="fa fa-exclamation-triangle"></i>
 					</div>
 				);
-			} else {
+			} else if(this.props.isLoaded === false && this.props.error === null) {
 				return (
-					<div></div>
-				);				
+					<div className="text-center">
+						<img width="70" height="70" src="assets/images/loader.gif" alt="Loading..." />
+					</div>
+				);
 			}
 		}
 		return (
@@ -84,13 +65,12 @@ class HomeTable extends Component {
 					<CardBody>
 						{loader()}
 						<Datatable
-							tableHeaders={this.header}
-							tableBody={this.state.items}
+							tableHeaders={this.state.header}
+							tableBody={this.props.items}
 							keyName="countryTable"
 							tableClass="striped hover table-responsive"
 							rowsPerPage={10}
 							rowsPerPageOption={[7, 10, 25, 50, 100, 200, 500]}
-						// initialSort={{ prop: 'TotalConfirmed TotalDeaths', isAscending: false }}
 						/>
 					</CardBody>
 				</Card>

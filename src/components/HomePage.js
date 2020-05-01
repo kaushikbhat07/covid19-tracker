@@ -22,6 +22,11 @@ class HomePage extends Component {
 			piechart: {
 				isLoaded: false,
 				error: null
+			},
+			hometable: {
+				isLoaded: false,
+				error: null,
+				items: ["-", "-", "-", "-"]
 			}
 		}
 	}
@@ -62,6 +67,10 @@ class HomePage extends Component {
 								}]
 							},
 							isLoaded: true,
+						},
+						hometable: {
+							isLoaded: true,
+							items: result['Countries']
 						}
 					});
 				},
@@ -79,7 +88,11 @@ class HomePage extends Component {
 						piechart: {
 							isLoaded: false,
 							error: error
-						}
+						},
+						hometable: {
+							isLoaded: false,
+							error: error
+						}						
 					});
 				}
 			);
@@ -104,7 +117,7 @@ class HomePage extends Component {
 				<div className="content-box-md">
 					<div className="row">
 						<div className="col-md-8">
-							<HomeTable />
+							<HomeTable items={this.state.hometable.items} isLoaded={this.state.hometable.isLoaded} error={this.state.hometable.error} />
 						</div>
 						<div className="col-md-4">
 							<TopFive />
