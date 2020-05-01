@@ -18,6 +18,10 @@ class HomePage extends Component {
 				isLoaded: false,
 				items: null,
 				error: null
+			},
+			piechart: {
+				isLoaded: false,
+				error: null
 			}
 		}
 	}
@@ -45,6 +49,19 @@ class HomePage extends Component {
 						india: {
 							isLoaded: true,
 							items: indiaArr
+						},
+						piechart: {
+							data: {
+								labels: ["Confirmed Cases", "Total Deaths", "Total Recovered"],
+								datasets: [{
+									label: "Global effect from Covid-19",
+									backgroundColor: ['#007bff', '#f70c0c', '#28a745'],
+									hoverBackgroundColor: ['#1d3557', '#d90429', '#134611'],
+									borderColor: '#fff',
+									data: [result['Global']['TotalConfirmed'], result['Global']['TotalDeaths'], result['Global']['TotalRecovered']]
+								}]
+							},
+							isLoaded: true,
 						}
 					});
 				},
@@ -56,6 +73,10 @@ class HomePage extends Component {
 							error: error
 						},
 						india: {
+							isLoaded: false,
+							error: error
+						},
+						piechart: {
 							isLoaded: false,
 							error: error
 						}
@@ -76,7 +97,7 @@ class HomePage extends Component {
 							/>
 						</div>
 						<div className="col-md-4">
-							<PieChart />
+							<PieChart data={this.state.piechart.data} isLoaded={this.state.piechart.isLoaded} error={this.state.piechart.error} />
 						</div>
 					</div>
 				</div>

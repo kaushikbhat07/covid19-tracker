@@ -17,64 +17,22 @@ class PieChart extends Component {
 					display: true,
 					position: 'top'
 				}
-			},
-			worldwide: {
-				isLoaded: false,
-				error: null
 			}
 		});
 	};
 
-	fetchData() {
-		fetch("https://api.covid19api.com/summary")
-			.then(res => res.json())
-			.then(
-				result => {
-					if (result['Global'] !== undefined) {
-						this.setState({
-							data: {
-								labels: ["Confirmed Cases", "Total Deaths", "Total Recovered"],
-								datasets: [{
-									label: "Global effect from Covid-19",
-									backgroundColor: ['#007bff', '#f70c0c', '#28a745'],
-									hoverBackgroundColor: ['#1d3557', '#d90429', '#134611'],
-									borderColor: '#fff',
-									data: [result['Global']['TotalConfirmed'], result['Global']['TotalDeaths'], result['Global']['TotalRecovered']]
-								}]
-							},
-							worldwide: {
-								isLoaded: true
-							}
-						});
-					}
-				},
-				error => {
-					this.setState({
-						worldwide: {
-							isLoaded: false,
-							error: error
-						}
-					});
-				}
-			);
-	}
-
-	componentDidMount() {
-		this.fetchData();
-	}
-
 	printChart() {
-		if (this.state.worldwide.isLoaded === true) {
+		if (this.props.isLoaded === true) {
 			return (
-				<Pie data={this.state.data} options={this.state.chartOptions} height={303} />
+				<Pie data={this.props.data} options={this.state.chartOptions} height={303} />
 			);
-		} else if (this.state.worldwide.isLoaded === false && this.state.worldwide.error === null) {
+		} else if (this.props.isLoaded === false && this.props.error === null) {
 			return (
 				<div className="text-center">
 					<img alt="Loading..." src="assets/images/loader.gif" />
 				</div>
 			);
-		} else if (this.state.worldwide.isLoaded === false && this.state.worldwide.error !== null) {
+		} else if (this.props.isLoaded === false && this.props.error !== null) {
 			return (
 				<div className="text-center">
 					<i className="fa fa-exclamation-triangle"></i>
