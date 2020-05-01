@@ -28,11 +28,14 @@ class TopNav extends Component {
 					<Collapse isOpen={this.state.isNavOpen} navbar center>
 						<Nav className="m-auto text-center" navbar>
 							<NavItem>
-								<NavLink className="nav-link" to="/home"><span className="fa fa-home"></span></NavLink>
+								<NavLink className="nav-link" to="/dashboard"><span className="fa fa-info-circle"></span></NavLink>
 							</NavItem>
 							<NavItem>
-								<NavLink className="nav-link" to="/about"><span className="fa fa-info-circle"></span></NavLink>
+								<NavLink className="nav-link" to="/india"><span className="fa fa-home"></span></NavLink>
 							</NavItem>
+							<NavItem>
+								<NavLink className="nav-link" to="/about"><span className="fa fa-question-circle"></span></NavLink>
+							</NavItem>							
 						</Nav>
 					</Collapse>
 				</Navbar>

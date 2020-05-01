@@ -38,7 +38,7 @@ class HomeTable extends Component {
 			$('.controlRow__root').css({ "margin-bottom": "20px" });
 			$('table').css({ "width": "100%", "height": "543px", "background-color": "#eceaea", "position": "relative" });
 			$('.controlRow__root .btn-group').css({ "display": "inherit" });
-			$('.thead').css({ "position": "sticky", "top": "0", "left": "0", "right": "0", "background-color": "#eceaea" });
+			$('.thead').css({ "position": "sticky", "top": "0", "left": "0", "right": "0", "background-color": "#eceaea" }).addClass('sticky-top');
 		});
 	}
 

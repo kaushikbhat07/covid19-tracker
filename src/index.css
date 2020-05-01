@@ -16,7 +16,7 @@ code {
 .container-wrapper {
 	padding-top: 68px;
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 767px) {
 	.container-wrapper {
 		padding-left: initial;
 		padding-right: initial;
@@ -36,7 +36,7 @@ code {
 .content-box-md {
 	padding-bottom: 48px;
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 767px) {
 	.content-box-xs {
 		padding-bottom: 48px;
 	}
@@ -71,4 +71,11 @@ code {
 }
 .controlRow__root {
 	position: -webkit-sticky
+}
+
+footer {
+	position: absolute !important;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
