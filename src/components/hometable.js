@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Card, CardBody } from 'reactstrap';
-import Datatable from 'react-bs-datatable';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -18,10 +17,10 @@ class HomeTable extends Component {
 
 		this.state = {
 			header: [
-				{ text: "Country", dataField: "Country", sort: true },
-				{ text: "Confirmed", dataField: "TotalConfirmed", sort: true },
-				{ text: "Deaths", dataField: "TotalDeaths", sort: true },
-				{ text: "Recovered", dataField: "TotalRecovered", sort: true }
+				{ text: "Country", dataField: "country", sort: true },
+				{ text: "Confirmed", dataField: "cases", sort: true },
+				{ text: "Deaths", dataField: "deaths", sort: true },
+				{ text: "Recovered", dataField: "recovered", sort: true }
 			]
 		};
 	}
@@ -29,19 +28,7 @@ class HomeTable extends Component {
 	componentDidMount() {
 
 		$(document).ready(function () {
-			// $('.controlRow__root .form-control').attr("placeholder", "Search for a country...");
 			$('table').addClass('table-responsive-sm').removeClass('table-bordered');
-			// $('.controlRow__root .col-sm-2').removeClass('col-sm-2').addClass('col-md-6');
-			// $('.controlRow__root .col-sm-4').removeClass('col-sm-4').addClass('col-md-6');
-			// $('.controlRow__root .col-sm-6').removeClass('text-right col-sm-6').addClass('col-md-12 text-center mt-4');
-			// $('table').addClass('table-borderless');
-			// // $('table .thead-tr').addClass('bg-danger');
-			// $('table .thead-tr td:nth-child(3)').addClass('text-danger');
-			// $('table .thead-tr td:nth-child(4)').addClass('text-success');
-			// $('table .thead-tr td:nth-child(2)').addClass('text-primary');
-			// $('table .thead-tr td:nth-child(1)').addClass('text-dark');
-			// $('.controlRow__root .input-group-append').remove();
-			// $('.paginationOpts__root .form-group').addClass('m-auto text-center');
 			// CSS
 			$('table').css({ "width": "100%", "position": "relative", "overflow-y": "scroll" });
 			$('.react-bootstrap-table').css({"max-height": "554px", "overflow-y": "scroll" });
@@ -52,8 +39,6 @@ class HomeTable extends Component {
 			$('thead tr th:nth-child(2)').addClass('text-primary');
 			$('thead tr th:nth-child(4)').addClass('text-success');
 			$('thead tr th:nth-child(1)').addClass('text-dark');
-			// $('.controlRow__root .btn-group').css({ "display": "inherit" });
-			// $('.thead').css({ "position": "sticky", "top": "0", "left": "0", "right": "0", "background-color": "#eceaea" }).addClass('sticky-top');
 		});
 	}
 

@@ -19,7 +19,7 @@ class Numbers extends Component {
 		const totalInfectedGlobal = () => {
 			if (this.props.worldwideisLoaded === true && this.props.worldwideItems !== null) {
 				return (
-					this.props.worldwideItems.TotalConfirmed.toLocaleString()
+					this.props.worldwideItems.cases.toLocaleString()
 				);
 			} else if (this.props.worldwideisLoaded === false && this.props.worldwideError != null) {
 				return (
@@ -34,7 +34,7 @@ class Numbers extends Component {
 		const totalRecoveredGlobal = () => {
 			if (this.props.worldwideisLoaded === true && this.props.worldwideItems !== null) {
 				return (
-					this.props.worldwideItems.TotalRecovered.toLocaleString()
+					this.props.worldwideItems.recovered.toLocaleString()
 				);
 			} else if (this.props.worldwideisLoaded === false && this.props.worldwideError != null) {
 				return (
@@ -49,7 +49,7 @@ class Numbers extends Component {
 		const totalDeadGlobal = () => {
 			if (this.props.worldwideisLoaded === true && this.props.worldwideItems !== null) {
 				return (
-					this.props.worldwideItems.TotalDeaths.toLocaleString()
+					this.props.worldwideItems.deaths.toLocaleString()
 				);
 			} else if (this.props.worldwideisLoaded === false && this.props.worldwideError != null) {
 				return (
@@ -64,7 +64,7 @@ class Numbers extends Component {
 		const totalDeadIndia = () => {
 			if (this.props.indiaisLoaded === true && this.props.indiaItems !== null) {
 				return (
-					this.props.indiaItems.TotalDeaths.toLocaleString()
+					parseInt(this.props.indiaItems.totaldeceased).toLocaleString()
 				);
 			} else if (this.props.indiaError) {
 				return (
@@ -79,7 +79,7 @@ class Numbers extends Component {
 		const totalReceoveredIndia = () => {
 			if (this.props.indiaisLoaded === true && this.props.indiaItems !== null) {
 				return (
-					this.props.indiaItems.TotalRecovered.toLocaleString()
+					parseInt(this.props.indiaItems.totalrecovered).toLocaleString()
 				);
 			} else if (this.props.indiaError) {
 				return (
@@ -94,7 +94,7 @@ class Numbers extends Component {
 		const totalInfectedIndia = () => {
 			if (this.props.indiaisLoaded === true && this.props.indiaItems !== null) {
 				return (
-					this.props.indiaItems.TotalConfirmed.toLocaleString()
+					parseInt(this.props.indiaItems.totalconfirmed).toLocaleString()
 				);
 			} else if (this.props.indiaError) {
 				return (

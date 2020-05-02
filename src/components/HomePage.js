@@ -45,92 +45,160 @@ class HomePage extends Component {
 		}
 	}
 	componentDidMount() {
-		this.getData();
+		this.getGlobalData();
+		this.getIndianData();
+		this.getCountriesData();
 	}
 
-	getData() {
-		fetch("https://api.covid19api.com/summary")
+	getIndianData() {
+		fetch("https://api.covid19india.org/data.json")
 			.then(res => res.json())
 			.then(
 				result => {
-					if (result['Countries'] !== undefined) {
-						var topfiveSortedArr = [];
-						topfiveSortedArr = result['Countries'].slice();
-						topfiveSortedArr.sort(
-							function (a, b) {
-								return b['TotalConfirmed'] - a['TotalConfirmed'];
+					if (result['cases_time_series'] !== undefined) {
+						this.setState({
+							india: {
+								isLoaded: true,
+								error: null,
+								items: result['cases_time_series'][result['cases_time_series'].length - 1]
 							}
-						);
-						var indiaArr = [];
-						result['Countries'].filter((param) => {
-							if (param['Slug'] === "india") {
-								indiaArr = param;
-							}
-							return 1;
 						})
 					}
+				},
+				error => {
+					this.getIndianData();
+					this.setState({
+						india: {
+							isLoaded: false,
+							error: error
+						}
+					});
+				}
+			)
+	}
+	getGlobalData() {
+		fetch("https://corona.lmao.ninja/v2/all")
+			.then(res => res.json())
+			.then(
+				result => {
+					if (result !== undefined) {
+						this.setState({
+							worldwide: {
+								isLoaded: true,
+								error: null,
+								items: result
+							},
+							piechart: {
+								data: {
+									labels: ["Confirmed Cases", "Total Deaths", "Total Recovered"],
+									datasets: [{
+										label: "Global effect from Covid-19",
+										backgroundColor: ['#007bff', '#f70c0c', '#28a745'],
+										hoverBackgroundColor: ['#1d3557', '#d90429', '#134611'],
+										borderColor: '#fff',
+										data: [result.cases, result.deaths, result.recovered]
+									}]
+								},
+								isLoaded: true,
+							},							
+						})
+					}
+				},
+				error => {
+					this.getGlobalData();
 					this.setState({
 						worldwide: {
-							isLoaded: true,
-							items: result['Global']
-						},
+							isLoaded: false,
+							error: error
+						}
+					});
+				}
+			)
+	}
+	getIndianData() {
+		fetch("https://api.covid19india.org/data.json")
+			.then(res => res.json())
+			.then(
+				result => {
+					if (result['cases_time_series'] !== undefined) {
+						this.setState({
+							india: {
+								isLoaded: true,
+								error: null,
+								items: result['cases_time_series'][result['cases_time_series'].length - 1]
+							}
+						})
+					}
+				},
+				error => {
+					this.getIndianData();
+					this.setState({
 						india: {
-							isLoaded: true,
-							items: indiaArr
-						},
-						piechart: {
-							data: {
-								labels: ["Confirmed Cases", "Total Deaths", "Total Recovered"],
-								datasets: [{
-									label: "Global effect from Covid-19",
-									backgroundColor: ['#007bff', '#f70c0c', '#28a745'],
-									hoverBackgroundColor: ['#1d3557', '#d90429', '#134611'],
-									borderColor: '#fff',
-									data: [result['Global']['TotalConfirmed'], result['Global']['TotalDeaths'], result['Global']['TotalRecovered']]
-								}]
-							},
-							isLoaded: true,
-						},
+							isLoaded: false,
+							error: error
+						}
+					});
+				}
+			)
+	}
+
+	getCountriesData() {
+		fetch("https://corona.lmao.ninja/v2/countries?sort=cases")
+			.then(res => res.json())
+			.then(
+				result => {
+					// Sort code
+					// if (result['Countries'] !== undefined) {
+					// 	var result = [];
+					// 	result = result['Countries'].slice();
+					// 	result.sort(
+					// 		function (a, b) {
+					// 			return b['cases'] - a['cases'];
+					// 		}
+					// 	);
+					// }
+					// Sort code
+					this.setState({
 						hometable: {
 							isLoaded: true,
-							items: result['Countries']
+							items: result
 						},
 						topfive: {
 							data: {
-								labels: [topfiveSortedArr[0]['Country'], topfiveSortedArr[1]['Country'], topfiveSortedArr[2]['Country'], topfiveSortedArr[3]['Country'], topfiveSortedArr[4]['Country']],
+								labels: [result[0]['country'], result[1]['country'], result[2]['country'], result[3]['country'], result[4]['country']],
 								datasets: [{
 									label: "Top 5 nations confirmed cases",
 									backgroundColor: ['#662e9b', '#43bccd', '#538d22', '#ff5400', '#f9c80e'],
 									hoverBackgroundColor: ['#4D2082', '#2F8A99', '#1a4301', '#DC4300', '#BD8C0A'],
 									borderColor: '#fff',
-									data: [topfiveSortedArr[0]['TotalConfirmed'], topfiveSortedArr[1]['TotalConfirmed'], topfiveSortedArr[2]['TotalConfirmed'], topfiveSortedArr[3]['TotalConfirmed'], topfiveSortedArr[4]['TotalConfirmed']]
+									data: [result[0]['cases'], result[1]['cases'], result[2]['cases'], result[3]['cases'], result[4]['cases']]
 								}]
 							},
 							isLoaded: true
 						},
 						topfivebarchart: {
 							data: {
-								labels: [topfiveSortedArr[0]['CountryCode'], topfiveSortedArr[1]['Country'], topfiveSortedArr[2]['CountryCode'], topfiveSortedArr[3]['Country'], topfiveSortedArr[4]['Country']],
+								labels: [result[0]['country'], result[1]['country'], result[2]['country'], result[3]['country'], result[4]['country']],
 								datasets: [{
 									label: ['Confirmed cases'],
 									backgroundColor: ['#1d3557', '#1d3557', '#1d3557', '#1d3557', '#1d3557'],
 									hoverBackgroundColor: ['#007bff', '#007bff', '#007bff', '#007bff', '#007bff',],
 									borderColor: '#000',
-									data: [topfiveSortedArr[0]['TotalConfirmed'], topfiveSortedArr[1]['TotalConfirmed'], topfiveSortedArr[2]['TotalConfirmed'], topfiveSortedArr[3]['TotalConfirmed'], topfiveSortedArr[4]['TotalConfirmed']]
+									data: [result[0]['cases'], result[1]['cases'], result[2]['cases'], result[3]['cases'], result[4]['cases']]
 								},
 								{
 									label: ['Death cases'],
 									backgroundColor: ['#d90429', '#d90429', '#d90429', '#d90429', '#d90429'],
 									hoverBackgroundColor: ['#d90429', '#d90429', '#d90429', '#d90429', '#d90429'],
 									borderColor: '#000',
-									data: [topfiveSortedArr[0]['TotalDeaths'], topfiveSortedArr[1]['TotalDeaths'], topfiveSortedArr[2]['TotalDeaths'], topfiveSortedArr[3]['TotalDeaths'], topfiveSortedArr[4]['TotalDeaths']]
+									data: [result[0]['deaths'], result[1]['deaths'], result[2]['deaths'], result[3]['deaths'], result[4]['deaths']]
 								},
 								{
 									label: ['Recovery Cases'],
 									backgroundColor: ['#134611', '#134611', '#134611', '#134611', '#134611'],
 									hoverBackgroundColor: ['#28a745', '#28a745', '#28a745', '#28a745', '#28a745'],
 									borderColor: '#000',
-									data: [topfiveSortedArr[0]['TotalRecovered'], topfiveSortedArr[1]['TotalRecovered'], topfiveSortedArr[2]['TotalRecovered'], topfiveSortedArr[3]['TotalRecovered'], topfiveSortedArr[4]['TotalRecovered']]
+									data: [result[0]['recovered'], result[1]['recovered'], result[2]['recovered'], result[3]['recovered'], result[4]['recovered']]
 								}
 								]
 							},
@@ -138,7 +206,7 @@ class HomePage extends Component {
 						},
 						linechart: {
 							data: {
-								labels: [topfiveSortedArr[0]['CountryCode'], topfiveSortedArr[1]['CountryCode'], topfiveSortedArr[2]['CountryCode'], topfiveSortedArr[3]['CountryCode'], topfiveSortedArr[4]['CountryCode'], topfiveSortedArr[5]['CountryCode'], topfiveSortedArr[6]['CountryCode'], topfiveSortedArr[7]['CountryCode'], topfiveSortedArr[8]['CountryCode'], topfiveSortedArr[9]['CountryCode'], topfiveSortedArr[10]['CountryCode']],
+								labels: [result[0]['country'], result[1]['country'], result[2]['country'], result[3]['country'], result[4]['country'], result[5]['country'], result[6]['country'], result[7]['country'], result[8]['country'], result[9]['country'], result[10]['country']],
 								datasets: [{
 									label: 'Confirmed cases',
 									fill: false,
@@ -146,7 +214,7 @@ class HomePage extends Component {
 									backgroundColor: ['#1d3557', '#1d3557', '#1d3557', '#1d3557', '#1d3557'],
 									hoverBackgroundColor: ['#007bff', '#007bff', '#007bff', '#007bff', '#007bff',],
 									borderColor: '#007bff',
-									data: [topfiveSortedArr[0]['TotalConfirmed'], topfiveSortedArr[1]['TotalConfirmed'], topfiveSortedArr[2]['TotalConfirmed'], topfiveSortedArr[3]['TotalConfirmed'], topfiveSortedArr[4]['TotalConfirmed'], topfiveSortedArr[5]['TotalConfirmed'], topfiveSortedArr[6]['TotalConfirmed'], topfiveSortedArr[7]['TotalConfirmed'], topfiveSortedArr[8]['TotalConfirmed'], topfiveSortedArr[9]['TotalConfirmed'], topfiveSortedArr[10]['TotalConfirmed']]
+									data: [result[0]['cases'], result[1]['cases'], result[2]['cases'], result[3]['cases'], result[4]['cases'], result[5]['cases'], result[6]['cases'], result[7]['cases'], result[8]['cases'], result[9]['cases'], result[10]['cases']]
 								},
 								{
 									label: ['Death cases'],
@@ -155,7 +223,7 @@ class HomePage extends Component {
 									backgroundColor: ['#d90429', '#d90429', '#d90429', '#d90429', '#d90429'],
 									hoverBackgroundColor: ['#d90429', '#d90429', '#d90429', '#d90429', '#d90429'],
 									borderColor: '#d90429',
-									data: [topfiveSortedArr[0]['TotalDeaths'], topfiveSortedArr[1]['TotalDeaths'], topfiveSortedArr[2]['TotalDeaths'], topfiveSortedArr[3]['TotalDeaths'], topfiveSortedArr[4]['TotalDeaths'], topfiveSortedArr[5]['TotalDeaths'], topfiveSortedArr[6]['TotalDeaths'], topfiveSortedArr[7]['TotalDeaths'], topfiveSortedArr[8]['TotalDeaths'], topfiveSortedArr[9]['TotalDeaths'], topfiveSortedArr[10]['TotalDeaths']]
+									data: [result[0]['deaths'], result[1]['deaths'], result[2]['deaths'], result[3]['deaths'], result[4]['deaths'], result[5]['deaths'], result[6]['deaths'], result[7]['deaths'], result[8]['deaths'], result[9]['deaths'], result[10]['deaths']]
 								},
 								{
 									label: ['Recovery Cases'],
@@ -164,7 +232,7 @@ class HomePage extends Component {
 									backgroundColor: ['#134611', '#134611', '#134611', '#134611', '#134611'],
 									hoverBackgroundColor: ['#28a745', '#28a745', '#28a745', '#28a745', '#28a745'],
 									borderColor: '#28a745',
-									data: [topfiveSortedArr[0]['TotalRecovered'], topfiveSortedArr[1]['TotalRecovered'], topfiveSortedArr[2]['TotalRecovered'], topfiveSortedArr[3]['TotalRecovered'], topfiveSortedArr[4]['TotalRecovered'], topfiveSortedArr[5]['TotalRecovered'], topfiveSortedArr[6]['TotalRecovered'], topfiveSortedArr[7]['TotalRecovered'], topfiveSortedArr[8]['TotalRecovered'], topfiveSortedArr[9]['TotalRecovered'], topfiveSortedArr[10]['TotalRecovered']]
+									data: [result[0]['recovered'], result[1]['recovered'], result[2]['recovered'], result[3]['recovered'], result[4]['recovered'], result[5]['recovered'], result[6]['recovered'], result[7]['recovered'], result[8]['recovered'], result[9]['recovered'], result[10]['recovered']]
 								}
 								]
 							},
@@ -173,20 +241,8 @@ class HomePage extends Component {
 					});
 				},
 				error => {
-					this.getData();
+					this.getCountriesData();
 					this.setState({
-						worldwide: {
-							isLoaded: false,
-							error: error
-						},
-						india: {
-							isLoaded: false,
-							error: error
-						},
-						piechart: {
-							isLoaded: false,
-							error: error
-						},
 						hometable: {
 							items: ["-", "-", "-", "-"],
 							isLoaded: false,
