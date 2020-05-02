@@ -26,7 +26,7 @@ class TopNav extends Component {
 					</NavbarBrand>
 					<NavbarToggler onClick={this.toggle} />
 					<Collapse isOpen={this.state.isNavOpen} navbar center>
-						<Nav className="m-auto text-center" navbar>
+						<Nav className="text-center icons-right" navbar>
 							<NavItem>
 								<NavLink onClick={this.toggle}className="nav-link" to="/dashboard"><span className="fa fa-info-circle"></span></NavLink>
 							</NavItem>

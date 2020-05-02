@@ -20,17 +20,20 @@ class StateTable extends Component {
 				{
 					name: 'Confirmed',
 					selector: 'confirmed',
-					sortable: true
+					sortable: true,
+					center: true
 				},
 				{
 					name: 'Deaths',
 					selector: 'deaths',
-					sortable: true
+					sortable: true,
+					center: true
 				},
 				{
 					name: 'Recovered',
 					selector: 'recovered',
-					sortable: true
+					sortable: true,
+					center: true
 				},
 			],
 			paginationrows: [5, 10, 15, 20, 25, 40]
@@ -39,6 +42,10 @@ class StateTable extends Component {
 
 	componentDidMount() {
 		$('.rdt_TableBody').css({ "width": "100%", "height": "303px", "overflow-y": "scroll" });
+		$('.rdt_TableCol_Sortable').addClass('font-weight-bold').css({"font-size" : "15px"});
+		$('#column-confirmed div').addClass('text-primary');
+		$('#column-deaths div').addClass('text-danger');
+		$('#column-recovered div').addClass('text-success');
 	}
 	render() {
 		const loader = () => {

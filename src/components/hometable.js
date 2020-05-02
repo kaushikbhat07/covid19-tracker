@@ -48,6 +48,10 @@ class HomeTable extends Component {
 			if ($(window).width() < 576) {
 				$('#pageDropDown').addClass('mt-3 mb-3');
 			}
+			$('thead tr th:nth-child(3)').addClass('text-danger');
+			$('thead tr th:nth-child(2)').addClass('text-primary');
+			$('thead tr th:nth-child(4)').addClass('text-success');
+			$('thead tr th:nth-child(1)').addClass('text-dark');
 			// $('.controlRow__root .btn-group').css({ "display": "inherit" });
 			// $('.thead').css({ "position": "sticky", "top": "0", "left": "0", "right": "0", "background-color": "#eceaea" }).addClass('sticky-top');
 		});
