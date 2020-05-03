@@ -25,7 +25,7 @@ class TopFiveBarChart extends Component {
     printChart() {
         if (this.props.isLoaded === true) {
             return (
-                <Line data={this.props.data} options={this.state.chartOptions} height={202} />
+                <Line data={this.props.data} options={this.state.chartOptions} height={450} />
             );
         } else if (this.props.isLoaded === false && this.props.error === null) {
             return (

@@ -9,6 +9,7 @@ class ContinentChart extends Component {
 		this.state = ({
 			isLoaded: false,
 			error: null,
+			date: null,
 			active: {
 				data: null,
 			},
@@ -47,7 +48,7 @@ class ContinentChart extends Component {
 					display: true,
 					position: 'top'
 				}
-			}			
+			}
 		});
 	};
 
@@ -55,7 +56,7 @@ class ContinentChart extends Component {
 		this.getContinentData();
 	}
 	getContinentData() {
-		fetch("https://corona.lmao.ninja/v2/continents?yesterday=false")
+		fetch("https://corona.lmao.ninja/v2/continents?yesterday=false&sort=active")
 			.then(res => res.json())
 			.then(
 				result => {
@@ -70,6 +71,7 @@ class ContinentChart extends Component {
 						this.setState({
 							isLoaded: true,
 							error: null,
+							date: result[0]['updated'],
 							active: {
 								data: {
 									labels: continentName,
@@ -88,7 +90,7 @@ class ContinentChart extends Component {
 									labels: continentName,
 									datasets: [{
 										label: "Deaths",
-										backgroundColor: ['#f21b3f', '#ffe900', '#53b3cb', '#083d77', '#820263', '#5e3719'],
+										backgroundColor: ['#d62828', '#2f3e46', '#fb5607', '#606c38', '#f08080', '#000000'],
 										borderColor: '#fff',
 										data: deaths,
 										borderWidth: "3"
@@ -101,7 +103,7 @@ class ContinentChart extends Component {
 									labels: continentName,
 									datasets: [{
 										label: "Deaths",
-										backgroundColor: ['#f21b3f', '#ffe900', '#53b3cb', '#083d77', '#820263', '#5e3719'],
+										backgroundColor: ['#f29559', '#3e8914', '#9e2a2b', '#6a4c93', '#242423', '#b36a5e'],
 										borderColor: '#fff',
 										data: recovered,
 										borderWidth: "3"
@@ -178,12 +180,31 @@ class ContinentChart extends Component {
 			);
 		}
 	}
+	convertGlobalTime() {
+		if (this.state.isLoaded === true) {
+			var dateUTC = new Date(this.state.date);
+			dateUTC = dateUTC.getTime()
+			var dateIST = new Date(dateUTC);
+			dateIST.setHours(dateIST.getHours() + 5);
+			dateIST.setMinutes(dateIST.getMinutes() + 30);
 
+			var dateString = new Date(dateIST).toUTCString();
+			dateString = dateString.split(' ').slice(0, 5).join(' ');
+			return (dateString);
+		} else {
+			return (
+				<div className="text-center">
+					<img alt="Loading..." src="assets/images/loader.gif" />
+				</div>
+			);
+		}
+	}
 	render() {
 		return (
 			<React.Fragment>
-				<div className="col-12 mb-2">
-					<h3 className="all-country-title">Continent Wise Count</h3>
+				<div className="col-12 mb-4">
+					<h3>Continent Wise Count</h3>
+					<span className="text-muted">Last updated: {this.convertGlobalTime()}</span>
 				</div>
 				<div className="content-box-md col-md-4">
 					<Card className="shadow">

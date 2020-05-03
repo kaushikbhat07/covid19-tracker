@@ -6,6 +6,7 @@ import TopFive from './topfive';
 import TopFiveBarChart from './TopFiveBarChart';
 import LineChart from './LineChart';
 import ContinentChart from './ContinentChart';
+import TestsMillion from './TestsMillion';
 
 class HomePage extends Component {
 	constructor(props) {
@@ -42,6 +43,10 @@ class HomePage extends Component {
 			linechart: {
 				isLoaded: false,
 				error: null
+			},
+			testsmillion: {
+				isLoaded: false,
+				error: null,
 			}
 		}
 	}
@@ -138,7 +143,40 @@ class HomePage extends Component {
 					// }
 					// Sort code
 					// var arr = [];
+					var testsArr = [];
+					for (let index = 0; index < 10; index++) {
+						testsArr.push(result[index]);
+					}
+					result.filter((param) => {
+						if (param['country'] === "India") {
+							testsArr.push(param);
+						}
+					})
 					this.setState({
+						testsmillion: {
+							data: {
+								labels: [testsArr[0]['country'], testsArr[1]['country'], testsArr[2]['country'], testsArr[3]['country'], testsArr[4]['country'], testsArr[5]['country'], testsArr[6]['country'], testsArr[7]['country'], testsArr[8]['country'], testsArr[9]['country'], testsArr[10]['country']],
+								datasets: [{
+									label: "Tests conducted per 1 mil population",
+									backgroundColor: 'rgba(29,53,87,0.5)',
+									hoverBackgroundColor: 'rgba(29,53,87,0.7)',
+									data: [testsArr[0]['testsPerOneMillion'], testsArr[1]['testsPerOneMillion'], testsArr[2]['testsPerOneMillion'], testsArr[3]['testsPerOneMillion'], testsArr[4]['testsPerOneMillion'], testsArr[5]['testsPerOneMillion'], testsArr[6]['testsPerOneMillion'], testsArr[7]['testsPerOneMillion'], testsArr[8]['testsPerOneMillion'], testsArr[9]['testsPerOneMillion'], testsArr[10]['testsPerOneMillion']]
+								},
+								{
+									label: "Cases per 1 million",
+									backgroundColor: '#000',
+									hoverBackgroundColor: '#000',
+									borderColor: '#000',
+									type: 'line',
+									fill: 'false',
+									data: [testsArr[0]['casesPerOneMillion'], testsArr[1]['casesPerOneMillion'], testsArr[2]['casesPerOneMillion'], testsArr[3]['casesPerOneMillion'], testsArr[4]['casesPerOneMillion'], testsArr[5]['casesPerOneMillion'], testsArr[6]['casesPerOneMillion'], testsArr[7]['casesPerOneMillion'], testsArr[8]['casesPerOneMillion'], testsArr[9]['casesPerOneMillion'], testsArr[10]['casesPerOneMillion']]
+								},
+								]
+							},
+							isLoaded: true,
+							error: null,
+							date: testsArr[0]['updated']
+						},
 						hometable: {
 							isLoaded: true,
 							items: result
@@ -223,6 +261,10 @@ class HomePage extends Component {
 				error => {
 					this.getCountriesData();
 					this.setState({
+						testsmillion: {
+							isLoaded: false,
+							error: error,
+						},
 						hometable: {
 							items: ["-", "-", "-", "-"],
 							isLoaded: false,
@@ -277,6 +319,9 @@ class HomePage extends Component {
 							<LineChart isLoaded={this.state.linechart.isLoaded} error={this.state.linechart.error} data={this.state.linechart.data} />
 						</div>
 					</div>
+				</div>
+				<div className="content-box-md">
+					<TestsMillion isLoaded={this.state.testsmillion.isLoaded} error={this.state.testsmillion.error} data={this.state.testsmillion.data} date={this.state.testsmillion.date} />
 				</div>
 				<div className="row content-box-md">
 					<ContinentChart />
