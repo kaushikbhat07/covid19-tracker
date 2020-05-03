@@ -88,7 +88,7 @@ class Numbers extends Component {
 			);
 		}
 		const todayCasesIndia = () => {
-			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null) {
+			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null && this.props.isLoaded === true && this.props.items !== null) {
 				return (
 					<sup className="text-danger">&nbsp;(+{this.state.todaycases.items['todayCases'].toLocaleString()})</sup>
 				);
@@ -99,7 +99,7 @@ class Numbers extends Component {
 			}
 		}
 		const todayDeathsIndia = () => {
-			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null) {
+			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null && this.props.isLoaded === true && this.props.items !== null) {
 				return (
 					<sup className="text-danger">&nbsp;(+{this.state.todaycases.items['todayDeaths'].toLocaleString()})</sup>
 				);

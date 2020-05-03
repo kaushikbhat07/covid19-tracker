@@ -20,7 +20,6 @@ class Main extends Component {
 					<Switch location={this.props.location}>
 						<Route path='/dashboard' component={Home} />
 						<Route exact path='/india' component={IndiaPage} />
-						<Route exact path='/about' />
 						<Redirect to="/dashboard" />
 					</Switch>
 					<Footer />

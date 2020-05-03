@@ -3,7 +3,7 @@ import { Card, CardBody } from 'reactstrap';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
 import DataTable from 'react-data-table-component';
-import { Modal, ModalBody, ModalHeader, Button } from 'reactstrap';
+import { Modal, ModalBody, ModalHeader, Button, ModalFooter } from 'reactstrap';
 import './StateTable.css';
 import $ from 'jquery';
 
@@ -246,9 +246,9 @@ const ExpanableComponent = ({ data, items, zone }) => {
 	var paginationRows = [5, 10, 25, 50, 100];
 	const externalCloseBtn = <button className="close" style={{ position: 'fixed', top: '20px', right: '30px', fontSize: '40px', color: '#fff' }} onClick={toggle}>&times;</button>;
 	return (
-		<div>
-			<Button onClick={toggle}>Click here</Button> for district-level data of {data.state}
-			<Modal isOpen={modal} toggle={toggle} external={externalCloseBtn}>
+		<div className="district-modal-btn">
+			<Button onClick={toggle} className="btn-sm ">Click here</Button> for district-level data of {data.state}
+			<Modal fade={false} isOpen={modal} toggle={toggle} external={externalCloseBtn}>
 				<ModalHeader toggle={toggle}>{data.state}</ModalHeader>
 				<ModalBody>
 					<div className="row mt-3">
@@ -324,6 +324,9 @@ const ExpanableComponent = ({ data, items, zone }) => {
 						pointerOnHover="true"
 					/>
 				</ModalBody>
+				<ModalFooter>
+					<Button onClick={toggle}>Close</Button>
+				</ModalFooter>
 			</Modal>
 		</div>
 	);

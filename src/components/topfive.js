@@ -25,7 +25,7 @@ class TopFive extends Component {
 	printChart() {
 		if (this.props.isLoaded === true) {
 			return (
-				<Doughnut data={this.props.data} options={this.state.chartOptions} height={380} />
+				<Doughnut data={this.props.data} options={this.state.chartOptions} height={525} />
 			);
 		} else if (this.props.isLoaded === false && this.props.error === null) {
 			return (

@@ -5,6 +5,7 @@ import HomeTable from './hometable';
 import TopFive from './topfive';
 import TopFiveBarChart from './TopFiveBarChart';
 import LineChart from './LineChart';
+import ContinentChart from './ContinentChart';
 
 class HomePage extends Component {
 	constructor(props) {
@@ -254,7 +255,7 @@ class HomePage extends Component {
 								worldwideItems={this.state.worldwide.items} worldwideisLoaded={this.state.worldwide.isLoaded} worldwideError={this.state.worldwide.error}
 								indiaItems={this.state.india.items} indiaisLoaded={this.state.india.isLoaded} indiaError={this.state.india.error}
 								lastModified={this.state.india.lastModified}
-									worldTime={this.state.hometable.items[0]['updated'] }
+								worldTime={this.state.hometable.items[0]['updated']}
 							/>
 						</div>
 						<div className="col-md-4">
@@ -266,14 +267,19 @@ class HomePage extends Component {
 					<div className="row">
 						<div className="col-md-8 content-box-xs">
 							<HomeTable items={this.state.hometable.items} isLoaded={this.state.hometable.isLoaded} error={this.state.hometable.error} />
-							<LineChart isLoaded={this.state.linechart.isLoaded} error={this.state.linechart.error} data={this.state.linechart.data} />
+
 						</div>
 						<div className="col-md-4">
 							<TopFive isLoaded={this.state.topfive.isLoaded} error={this.state.topfive.error} data={this.state.topfive.data} />
-
+						</div>
+						<div className="col-12">
 							<TopFiveBarChart isLoaded={this.state.topfivebarchart.isLoaded} error={this.state.topfivebarchart.error} data={this.state.topfivebarchart.data} />
+							<LineChart isLoaded={this.state.linechart.isLoaded} error={this.state.linechart.error} data={this.state.linechart.data} />
 						</div>
 					</div>
+				</div>
+				<div className="row content-box-md">
+					<ContinentChart />
 				</div>
 			</div>
 		);

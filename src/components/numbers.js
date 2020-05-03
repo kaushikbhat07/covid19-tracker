@@ -89,7 +89,7 @@ class Numbers extends Component {
 			);
 		}
 		const todayCasesIndia = () => {
-			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null) {
+			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null && this.props.indiaisLoaded === true && this.props.indiaItems !== null) {
 				return (
 					<sup className="text-danger">(+{this.state.todaycases.items['todayCases'].toLocaleString()})</sup>
 				);
@@ -100,7 +100,7 @@ class Numbers extends Component {
 			}
 		}
 		const todayDeathsIndia = () => {
-			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null) {
+			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null && this.props.indiaisLoaded === true && this.props.indiaItems !== null) {
 				return (
 					<sup className="text-danger">(+{this.state.todaycases.items['todayDeaths'].toLocaleString()})</sup>
 				);
@@ -234,7 +234,7 @@ class Numbers extends Component {
 			}
 		}
 		return (
-			<div className="numbers-data" >
+			<div className="numbers-data">
 				<div class="row">
 					<div className="col-md-12">
 						<h3>Covid19 cases - Global</h3><span className="text-muted">Last updated: {convertGlobalTime()}</span>

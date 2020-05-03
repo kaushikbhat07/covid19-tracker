@@ -30,10 +30,10 @@ class HomeTable extends Component {
 	componentDidMount() {
 
 		$(document).ready(function () {
-			$('table').addClass('table-responsive-sm').removeClass('table-bordered');
+			$('table').addClass('table-responsive-lg').removeClass('table-bordered');
 			// CSS
 			$('table').css({ "width": "100%", "position": "relative", "overflow-y": "scroll" });
-			$('.react-bootstrap-table').css({"max-height": "554px", "overflow-y": "scroll" });
+			$('.react-bootstrap-table').css({"max-height": "400px", "overflow-y": "scroll" });
 			if ($(window).width() < 576) {
 				$('#pageDropDown').addClass('mt-3 mb-3');
 			}
