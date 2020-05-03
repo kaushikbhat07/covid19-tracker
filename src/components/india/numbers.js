@@ -89,9 +89,11 @@ class Numbers extends Component {
 		}
 		const todayCasesIndia = () => {
 			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null && this.props.isLoaded === true && this.props.items !== null) {
-				return (
-					<sup className="text-danger">&nbsp;(+{this.state.todaycases.items['todayCases'].toLocaleString()})</sup>
-				);
+				if(parseInt(this.state.todaycases.items['todayCases']) > 0) {
+					return (
+						<sup className="text-danger">(+{this.state.todaycases.items['todayCases'].toLocaleString()})</sup>
+					);
+				}
 			} else if (this.state.todaycases.error) {
 				return (
 					unableToFetch()
@@ -100,9 +102,11 @@ class Numbers extends Component {
 		}
 		const todayDeathsIndia = () => {
 			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null && this.props.isLoaded === true && this.props.items !== null) {
-				return (
-					<sup className="text-danger">&nbsp;(+{this.state.todaycases.items['todayDeaths'].toLocaleString()})</sup>
-				);
+				if(parseInt(this.state.todaycases.items['todayDeaths']) > 0) {
+					return (
+						<sup className="text-danger">(+{this.state.todaycases.items['todayDeaths'].toLocaleString()})</sup>
+					);
+				}
 			} else if (this.state.todaycases.error) {
 				return (
 					unableToFetch()

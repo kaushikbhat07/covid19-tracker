@@ -150,6 +150,7 @@ class StateTable extends Component {
 						{loader()}
 						{/* {console.log(this.props.items)} */}
 						<DataTable
+							keyField='id0'
 							title="Indian states"
 							columns={this.state.columns}
 							data={this.props.data}
@@ -169,6 +170,13 @@ class StateTable extends Component {
 		);
 	}
 }
+const districtExpandable = ({data}) => {
+	return(
+		<span>
+			works
+		</span>
+	);
+}	
 
 const ExpanableComponent = ({ data, items, zone }) => {
 
@@ -240,9 +248,7 @@ const ExpanableComponent = ({ data, items, zone }) => {
 			center: true
 		}
 	];
-	const districtExpandable = () => {
-		return (<div></div>);
-	}
+
 	var paginationRows = [5, 10, 25, 50, 100];
 	const externalCloseBtn = <button className="close" style={{ position: 'fixed', top: '20px', right: '30px', fontSize: '40px', color: '#fff' }} onClick={toggle}>&times;</button>;
 	return (
@@ -296,26 +302,28 @@ const ExpanableComponent = ({ data, items, zone }) => {
 					</div>
 
 					<DataTable
+						keyField='id1'
 						title="District-wise count"
 						columns={columnsDistrict}
 						data={districtArr['districtData']}
 						pagination="true"
-						expandableRows="false"
-						expandOnRowClicked="false"
+						expandableRows="true"
+						expandOnRowClicked="true"
 						expandableRowsComponent={districtExpandable}
-						className="table-india-states"
+						className="table-district-data"
 						highlightOnHover="true"
 						paginationPerPage="50"
 						paginationRowsPerPageOptions={paginationRows}
 						pointerOnHover="true"
 					/>
 					<DataTable
+						keyField='id2'
 						title={data.state + " district zones"}
 						columns={columnsDistrictZones}
 						data={zoneArr}
 						pagination="true"
-						expandableRows="false"
-						expandOnRowClicked="false"
+						expandableRows="true"
+						expandOnRowClicked="true"
 						expandableRowsComponent={districtExpandable}
 						className="table-zone-data"
 						highlightOnHover="true"
