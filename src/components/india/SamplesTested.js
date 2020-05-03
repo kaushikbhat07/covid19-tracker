@@ -25,7 +25,7 @@ class SamplesTested extends Component {
 						<h4><span className="text-danger">{parseInt(this.props.items.totalsamplestested).toLocaleString()}</span> samples have been tested as of {this.props.items.updatetimestamp}.&nbsp;
 						<sub><a target="_blank" rel="noopener noreferrer" href={this.props.items.source}>Source <i className="fa fa-external-link-alt"></i></a></sub></h4>
 						<a target="_blank" rel="noopener noreferrer" href="https://news.google.com/topics/CAAqBwgKMMqAmAsw9KmvAw?oc=3&ceid=IN:en" className="btn btn-primary text-uppercase text-light mt-4 mb-1">
-							Latest COVID-19 NEWS
+							Latest COVID-19 NEWS <i className="fa fa-external-link"></i>
 						</a>						
 					</div>
 				);

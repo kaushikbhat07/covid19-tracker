@@ -170,15 +170,51 @@ class StateTable extends Component {
 		);
 	}
 }
-const districtExpandable = ({data}) => {
-	return(
-		<span>
-			works
-		</span>
-	);
-}	
-
+const doNothing = () => {
+	return 1;
+}
 const ExpanableComponent = ({ data, items, zone }) => {
+
+	const ExpanableComponent = ({ data, zone }) => {
+		var districtZone = [];
+		zone.filter((param) => {
+			if (param['district'] === data.district) {
+				districtZone = param;
+			}
+			return 1;
+		});
+		const displayZone = () => {
+			if (districtZone['zone'] == "Red") {
+				return (
+					<span className="text-danger"> {districtZone['zone']}</span>
+				);
+			} else if (districtZone['zone'] == "Orange") {
+				return (
+					<span className="text-orange"> {districtZone['zone']}</span>
+				);
+			}
+			else if (districtZone['zone'] == "Green") {
+				return (
+					<span className="text-success"> {districtZone['zone']}</span>
+				);
+			} else {
+				return (
+					<span className="text-dark"> Unknown</span>
+				);
+			}
+		}
+		return (
+			<div className="ml-3">
+				<span className="text-muted">
+					District: {data.district}
+				</span><br />
+				<span className="text-muted">
+					Zone:
+					{displayZone()}
+				</span>
+			</div>
+		);
+	}
 
 	const [modal, setModal] = useState(false);
 
@@ -251,6 +287,28 @@ const ExpanableComponent = ({ data, items, zone }) => {
 
 	var paginationRows = [5, 10, 25, 50, 100];
 	const externalCloseBtn = <button className="close" style={{ position: 'fixed', top: '20px', right: '30px', fontSize: '40px', color: '#fff' }} onClick={toggle}>&times;</button>;
+
+	const printTodayConfirmed = () => {
+		if (parseInt(data.deltaconfirmed) > 0) {
+			return (
+				<sup className="text-danger">(+{data.deltaconfirmed})</sup>
+			);
+		}
+	}
+	const printTodayRecovered = () => {
+		if (parseInt(data.deltarecovered) > 0) {
+			return (
+				<sup className="text-success">(+{data.deltarecovered})</sup>
+			);
+		}
+	}
+	const printTodayDeaths = () => {
+		if (parseInt(data.deltadeaths) > 0) {
+			return (
+				<sup className="text-danger">(+{data.deltadeaths})</sup>
+			);
+		}
+	}
 	return (
 		<div className="district-modal-btn">
 			<Button onClick={toggle} className="btn-sm ">Click here</Button> for district-level data of {data.state}
@@ -264,7 +322,7 @@ const ExpanableComponent = ({ data, items, zone }) => {
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-uppercase mb-1">Total Infected</div>
-											<div class="h5 mb-0 font-weight-bold text-primary">{data.confirmed} <sup className="text-danger">(+{data.deltaconfirmed})</sup></div>
+											<div class="h5 mb-0 font-weight-bold text-primary">{data.confirmed.toLocaleString()} {printTodayConfirmed()}</div>
 										</div>
 									</div>
 								</div>
@@ -277,7 +335,7 @@ const ExpanableComponent = ({ data, items, zone }) => {
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-uppercase mb-1">Total Recovered</div>
-											<div class="h5 mb-0 font-weight-bold text-success">{data.recovered} <sup className="text-success">(+{data.deltarecovered})</sup></div>
+											<div class="h5 mb-0 font-weight-bold text-success">{(data.recovered).toLocaleString()} {printTodayRecovered()}</div>
 										</div>
 									</div>
 								</div>
@@ -290,7 +348,7 @@ const ExpanableComponent = ({ data, items, zone }) => {
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-uppercase mb-1">Total Deaths</div>
-											<div class="h5 mb-0 font-weight-bold text-danger">{data.deaths} <sup className="text-danger">(+{data.deltadeaths})</sup></div>
+											<div class="h5 mb-0 font-weight-bold text-danger">{data.deaths} {printTodayDeaths()}</div>
 										</div>
 									</div>
 								</div>
@@ -309,7 +367,7 @@ const ExpanableComponent = ({ data, items, zone }) => {
 						pagination="true"
 						expandableRows="true"
 						expandOnRowClicked="true"
-						expandableRowsComponent={districtExpandable}
+						expandableRowsComponent={<ExpanableComponent zone={zoneArr} />}
 						className="table-district-data"
 						highlightOnHover="true"
 						paginationPerPage="50"
@@ -324,13 +382,16 @@ const ExpanableComponent = ({ data, items, zone }) => {
 						pagination="true"
 						expandableRows="true"
 						expandOnRowClicked="true"
-						expandableRowsComponent={districtExpandable}
+						expandableRowsComponent={<ExpanableComponent zone={zoneArr} />}
 						className="table-zone-data"
 						highlightOnHover="true"
 						paginationPerPage="50"
 						paginationRowsPerPageOptions={paginationRows}
 						pointerOnHover="true"
 					/>
+					<div className="text-center mt-3">
+						<a className="btn btn-primary btn-sm text-light" target="_blank" rel="noopener noreferrer" href="https://www.indiatoday.in/information/story/coronavirus-centre-issues-state-wise-division-of-red-orange-and-green-zone-here-s-how-they-will-differ-1673222-2020-05-01">Click here <i className="fa fa-external-link"></i></a> to know what these <span className="text-danger">zones</span> mean.
+					</div>
 				</ModalBody>
 				<ModalFooter>
 					<Button onClick={toggle}>Close</Button>

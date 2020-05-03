@@ -53,9 +53,9 @@ class TopNav extends Component {
 				<Modal isOpen={this.state.isModalOpen} fade={false} toggle={this.toggleModal}>
 					<ModalHeader toggle={this.toggleModal}>About this data</ModalHeader>
 					<ModalBody>
-						<h5>It changes rapidly.</h5>
+						<h5>Data is collected from various sources & It changes rapidly.</h5>
 						<p>
-							This data changes rapidly, so what’s shown may be out of date. Table totals may not always represent an accurate sum. Information about reported cases is also available on the <a href="https://who.in" target="_blank">World Health Organization</a> & <a href="https://worldometers.info" target="_blank">worldoMeters.info</a>
+							This data changes rapidly, so what’s shown may be out of date. Table values may not always be 100% accurate. Information about reported cases is also available on the <a href="https://who.in" target="_blank">World Health Organization</a> & <a href="https://worldometers.info" target="_blank">worldoMeters.info</a>
 						</p>
 						<h5>It doesn’t include all cases</h5>
 						<p>
