@@ -21,7 +21,7 @@ class TopNav extends Component {
 		return (
 			<div>
 				<Navbar color="light" light expand="md" className="shadow fixed-top">
-					<NavbarBrand href="">
+					<NavbarBrand href="/">
 						<img src="assets/images/logo.png" alt="Covid-19 Logo" />
 					</NavbarBrand>
 					<NavbarToggler onClick={this.toggle} />
@@ -31,7 +31,7 @@ class TopNav extends Component {
 								<NavLink onClick={this.toggle}className="nav-link" to="/dashboard"><span className="fa fa-info-circle"></span></NavLink>
 							</NavItem>
 							<NavItem>
-								<NavLink onClick={this.toggle} className="nav-link" to="/india"><span className="fa fa-home"></span></NavLink>
+								<NavLink onClick={this.toggle} className="nav-link" to="/india#top"><span className="fa fa-home"></span></NavLink>
 							</NavItem>
 							<NavItem>
 								<NavLink onClick={this.toggle} className="nav-link" to="/about"><span className="fa fa-question-circle"></span></NavLink>

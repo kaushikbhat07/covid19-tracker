@@ -24,7 +24,7 @@ class PieChart extends Component {
 	printChart() {
 		if (this.props.isLoaded === true) {
 			return (
-				<Pie data={this.props.data} options={this.state.chartOptions} height={303} />
+				<Pie data={this.props.data} options={this.state.chartOptions} height={350} />
 			);
 		} else if (this.props.isLoaded === false && this.props.error === null) {
 			return (

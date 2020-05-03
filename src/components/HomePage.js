@@ -77,7 +77,7 @@ class HomePage extends Component {
 			)
 	}
 	getGlobalData() {
-		fetch("https://corona.lmao.ninja/v2/all")
+		fetch("https://corona.lmao.ninja/v2/all?yesterday=false")
 			.then(res => res.json())
 			.then(
 				result => {
@@ -100,7 +100,7 @@ class HomePage extends Component {
 									}]
 								},
 								isLoaded: true,
-							},							
+							},
 						})
 					}
 				},
@@ -110,30 +110,8 @@ class HomePage extends Component {
 						worldwide: {
 							isLoaded: false,
 							error: error
-						}
-					});
-				}
-			)
-	}
-	getIndianData() {
-		fetch("https://api.covid19india.org/data.json")
-			.then(res => res.json())
-			.then(
-				result => {
-					if (result['cases_time_series'] !== undefined) {
-						this.setState({
-							india: {
-								isLoaded: true,
-								error: null,
-								items: result['cases_time_series'][result['cases_time_series'].length - 1]
-							}
-						})
-					}
-				},
-				error => {
-					this.getIndianData();
-					this.setState({
-						india: {
+						},
+						piechart: {
 							isLoaded: false,
 							error: error
 						}
@@ -158,6 +136,7 @@ class HomePage extends Component {
 					// 	);
 					// }
 					// Sort code
+					// var arr = [];
 					this.setState({
 						hometable: {
 							isLoaded: true,
@@ -274,6 +253,8 @@ class HomePage extends Component {
 							<Numbers
 								worldwideItems={this.state.worldwide.items} worldwideisLoaded={this.state.worldwide.isLoaded} worldwideError={this.state.worldwide.error}
 								indiaItems={this.state.india.items} indiaisLoaded={this.state.india.isLoaded} indiaError={this.state.india.error}
+								lastModified={this.state.india.lastModified}
+									worldTime={this.state.hometable.items[0]['updated'] }
 							/>
 						</div>
 						<div className="col-md-4">

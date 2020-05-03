@@ -1,6 +1,78 @@
 import React, { Component } from 'react';
 
 class Numbers extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			india: {
+				lastModified: ["-"],
+				worldTime: this.props.worldTime
+			},
+			todaycases: {
+				isLoaded: false,
+				error: null,
+				items: []
+			}
+		}
+	}
+
+	componentDidMount() {
+		this.getIndiaDate();
+		this.getTodayCases();
+	}
+
+	getTodayCases() {
+		fetch("https://corona.lmao.ninja/v2/countries/india")
+			.then(res => res.json())
+			.then(
+				result => {
+					if (result !== undefined) {
+						this.setState({
+							todaycases: {
+								isLoaded: true,
+								error: null,
+								items: result
+							}
+						})
+					}
+				},
+				error => {
+					this.getTodayCases();
+					this.setState({
+						todaycases: {
+							isLoaded: false,
+							error: error
+						}
+					});
+				}
+			)
+	}
+
+	getIndiaDate() {
+		fetch("https://api.covid19india.org/data.json", {
+			method: 'HEAD'
+		})
+			.then(
+				response => {
+					if (response.ok) {
+						this.setState({
+							india: {
+								lastModified: response.headers.get('last-modified')
+							}
+						})
+					}
+				},
+				error => {
+					this.getIndiaDate();
+					this.setState({
+						india: {
+							lastModified: error
+						}
+					})
+				}
+			)
+	}
 	render() {
 		const loader = () => {
 			return (
@@ -16,10 +88,34 @@ class Numbers extends Component {
 				</div>
 			);
 		}
+		const todayCasesIndia = () => {
+			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null) {
+				return (
+					<sup className="text-danger">(+{this.state.todaycases.items['todayCases'].toLocaleString()})</sup>
+				);
+			} else if (this.state.todaycases.error) {
+				return (
+					unableToFetch()
+				);
+			}
+		}
+		const todayDeathsIndia = () => {
+			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null) {
+				return (
+					<sup className="text-danger">(+{this.state.todaycases.items['todayDeaths'].toLocaleString()})</sup>
+				);
+			} else if (this.state.todaycases.error) {
+				return (
+					unableToFetch()
+				);
+			}
+		}
 		const totalInfectedGlobal = () => {
 			if (this.props.worldwideisLoaded === true && this.props.worldwideItems !== null) {
 				return (
-					this.props.worldwideItems.cases.toLocaleString()
+					<span>
+						{this.props.worldwideItems.cases.toLocaleString()} <sup className="text-danger">(+{this.props.worldwideItems.todayCases.toLocaleString()})</sup>
+					</span>
 				);
 			} else if (this.props.worldwideisLoaded === false && this.props.worldwideError != null) {
 				return (
@@ -49,8 +145,9 @@ class Numbers extends Component {
 		const totalDeadGlobal = () => {
 			if (this.props.worldwideisLoaded === true && this.props.worldwideItems !== null) {
 				return (
-					this.props.worldwideItems.deaths.toLocaleString()
-				);
+					<span>
+						{this.props.worldwideItems.deaths.toLocaleString()} <sup className="text-danger">(+{this.props.worldwideItems.todayDeaths.toLocaleString()})</sup>
+					</span>);
 			} else if (this.props.worldwideisLoaded === false && this.props.worldwideError != null) {
 				return (
 					unableToFetch()
@@ -106,11 +203,41 @@ class Numbers extends Component {
 				);
 			}
 		}
+		const convertIndianDate = () => {
+			if (this.props.indiaisLoaded === true) {
+				var dateUTC = new Date(this.state.india.lastModified);
+				dateUTC = dateUTC.getTime()
+				var dateIST = new Date(dateUTC);
+				dateIST.setHours(dateIST.getHours() + 5);
+				dateIST.setMinutes(dateIST.getMinutes() + 30);
+
+				var dateString = new Date(dateIST).toUTCString();
+				dateString = dateString.split(' ').slice(0, 5).join(' ');
+				return (dateString);
+			} else {
+				loader();
+			}
+		}
+		const convertGlobalTime = () => {
+			if (this.props.worldwideisLoaded === true) {
+				var dateUTC = new Date(this.props.worldTime);
+				dateUTC = dateUTC.getTime()
+				var dateIST = new Date(dateUTC);
+				dateIST.setHours(dateIST.getHours() + 5);
+				dateIST.setMinutes(dateIST.getMinutes() + 30);
+
+				var dateString = new Date(dateIST).toUTCString();
+				dateString = dateString.split(' ').slice(0, 5).join(' ');
+				return (dateString);
+			} else {
+				loader();
+			}
+		}
 		return (
 			<div className="numbers-data" >
 				<div class="row">
 					<div className="col-md-12">
-						<h3>Covid19 cases - Global</h3>
+						<h3>Covid19 cases - Global</h3><span className="text-muted">Last updated: {convertGlobalTime()}</span>
 					</div>
 				</div>
 				<div className="row mt-3">
@@ -158,7 +285,7 @@ class Numbers extends Component {
 
 				<div class="row">
 					<div className="col-md-12">
-						<h3>Covid19 cases - India</h3>
+						<h3>Covid19 cases - India</h3><span className="text-muted">Last updated: {convertIndianDate()}</span>
 					</div>
 				</div>
 				<div className="row mt-3">
@@ -168,7 +295,8 @@ class Numbers extends Component {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="text-xs font-weight-bold text-uppercase mb-1">Total Infected</div>
-										<div class="h5 mb-0 font-weight-bold text-primary">{totalInfectedIndia()}</div>
+										<div class="h5 mb-0 font-weight-bold text-primary">{totalInfectedIndia()}
+											{todayCasesIndia()}</div>
 									</div>
 								</div>
 							</div>
@@ -194,7 +322,8 @@ class Numbers extends Component {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="text-xs font-weight-bold text-uppercase mb-1">Total Deaths</div>
-										<div class="h5 mb-0 font-weight-bold text-danger">{totalDeadIndia()}</div>
+										<div class="h5 mb-0 font-weight-bold text-danger">{totalDeadIndia()}
+											{todayDeathsIndia()}</div>
 									</div>
 								</div>
 							</div>

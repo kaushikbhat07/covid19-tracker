@@ -18,9 +18,11 @@ class HomeTable extends Component {
 		this.state = {
 			header: [
 				{ text: "Country", dataField: "country", sort: true },
-				{ text: "Confirmed", dataField: "cases", sort: true },
+				{ text: "Total cases", dataField: "cases", sort: true },
+				{ text: "Active cases", dataField: "active", sort: true },
 				{ text: "Deaths", dataField: "deaths", sort: true },
-				{ text: "Recovered", dataField: "recovered", sort: true }
+				{ text: "Recovered", dataField: "recovered", sort: true },
+				{ text: "Tests conducted", dataField: "tests", sort: true },
 			]
 		};
 	}
@@ -35,10 +37,12 @@ class HomeTable extends Component {
 			if ($(window).width() < 576) {
 				$('#pageDropDown').addClass('mt-3 mb-3');
 			}
-			$('thead tr th:nth-child(3)').addClass('text-danger');
+			$('thead tr th:nth-child(4)').addClass('text-danger');
 			$('thead tr th:nth-child(2)').addClass('text-primary');
-			$('thead tr th:nth-child(4)').addClass('text-success');
+			$('thead tr th:nth-child(6)').addClass('text-info');
+			$('thead tr th:nth-child(5)').addClass('text-success');
 			$('thead tr th:nth-child(1)').addClass('text-dark');
+			$('thead tr th:nth-child(3)').addClass('text-warning');
 		});
 	}
 

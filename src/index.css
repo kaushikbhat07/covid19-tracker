@@ -122,3 +122,14 @@ tbody > tr td:nth-child(4) {
 		max-width: 1200px;
 	}
 }
+.react-bootstrap-table {
+	font-size: 13px;
+}
+.rdt_ExpanderRow div {
+	margin: 30px 55px;
+}
+@media screen and (min-width: 576px) {
+	.modal-dialog {
+		max-width: 800px;
+	}
+}

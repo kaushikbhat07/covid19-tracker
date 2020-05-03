@@ -1,0 +1,34 @@
+.rdt_TableBody {
+    width: 100%; 
+    height: 303px; 
+    overflow-y: scroll;
+}
+.rdt_TableCol_Sortable {
+    font-weight: bold;
+    font-size: 15px;
+}
+#column-confirmed div {
+    color: #007bff !important;
+}
+#column-deaths div, #column-deceased div {
+    color: #dc3545 !important;
+}
+#column-recovered div {
+    color: #28a745 !important;
+}
+#column-active div {
+    color: #ffc107 !important;
+}
+#column-zone div {
+    color: #dc3545 !important;
+}
+#column-lastupdated div {
+    color: #28a745 !important;
+}
+@media screen and (max-width: 576px) {
+    button.close {
+        position: fixed;
+        right: 30px;
+        z-index: 9999;
+    }
+}
