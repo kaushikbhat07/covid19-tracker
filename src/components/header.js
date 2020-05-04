@@ -60,7 +60,7 @@ class TopNav extends Component {
 						<p>
 							This data changes rapidly, so what’s shown may be out of date. Table values may not always be 100% accurate. Information about reported cases is also available on the <a href="https://who.in" target="_blank" rel="noopener noreferrer">World Health Organization</a> & <a href="https://worldometers.info" target="_blank" rel="noopener noreferrer">worldoMeters.info</a>
 						</p>
-						<h5>It doesn’t include all cases</h5>
+						<h5>It might not include all cases</h5>
 						<p>
 							Confirmed cases aren’t all cases. They only include people who tested positive. Testing rules and availability vary by country.
 						</p>

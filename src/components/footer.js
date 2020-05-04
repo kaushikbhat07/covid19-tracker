@@ -11,7 +11,7 @@ class Footer extends Component {
 								<a href="https://github.com/kaushikbhat07/covid19-tracker" target="_blank" rel="noopener noreferrer" className="social-icons">
 									<i className="fa fa-github"></i>
 								</a>
-								<a target="_blank" rel="noopener noreferrer" href="https://google form link/" className="social-icons">
+								<a target="_blank" rel="noopener noreferrer" href="https://forms.gle/fy2CDVBrvtcwfHTV9" className="social-icons">
 									<i className="fa fa-bug"></i>
 								</a>					
 							</div>
