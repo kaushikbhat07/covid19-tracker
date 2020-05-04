@@ -312,7 +312,7 @@ class IndiaPage extends Component {
 				</div>
 				<div className="content-box-md">
 					<div className="row">
-						<div className="col-12 content-box-xs">
+						<div className="col-12">
 							<TopFiveLineGraph data={this.state.linechart.data} isLoaded={this.state.linechart.isLoaded} error={this.state.linechart.error} />
 						</div>
 					</div>
