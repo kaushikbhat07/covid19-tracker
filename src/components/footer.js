@@ -8,9 +8,6 @@ class Footer extends Component {
 					<div className="row m-auto">
 						<div className="col-md-12">
 							<div className="social-icon-wrapper">
-								<a href="https://www.linkedin.com/in/kaushikbhat7" target="_blank" rel="noopener noreferrer" className="social-icons">
-									<i className="fa fa-linkedin"></i>
-								</a>
 								<a href="https://github.com/kaushikbhat07/covid19-tracker" target="_blank" rel="noopener noreferrer" className="social-icons">
 									<i className="fa fa-github"></i>
 								</a>

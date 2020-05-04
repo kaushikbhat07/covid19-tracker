@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardText } from 'reactstrap';
-import { Bar, Line } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 class IndianTrend extends Component {
 	constructor(props) {

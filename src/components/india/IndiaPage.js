@@ -83,6 +83,7 @@ class IndiaPage extends Component {
 							trendConfirmed.push(sub['totalconfirmed']);
 							trendDeaths.push(sub['totaldeceased']);
 							trendRecovered.push(sub['totalrecovered']);
+							return 1;
 						})
 						var trendDatesLatest = [], trendConfirmedLatest = [], trendDeathsLatest = [], trendRecoveredLatest = [];
 

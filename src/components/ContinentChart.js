@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardText } from 'reactstrap';
-import { polarArea, Pie, Polar, Doughnut } from 'react-chartjs-2';
+import { Card, CardBody } from 'reactstrap';
+import { Pie, Doughnut } from 'react-chartjs-2';
 
 class ContinentChart extends Component {
 	constructor(props) {
@@ -60,12 +60,13 @@ class ContinentChart extends Component {
 			.then(res => res.json())
 			.then(
 				result => {
-					var continentName = [], cases = [], deaths = [], recovered = [], active = [];
+					var continentName = [], deaths = [], recovered = [], active = [];
 					result.map((sub) => {
 						continentName.push(sub.continent);
 						active.push(sub.active);
 						deaths.push(sub.deaths);
 						recovered.push(sub.recovered);
+						return 1;
 					})
 					if (result !== undefined) {
 						this.setState({

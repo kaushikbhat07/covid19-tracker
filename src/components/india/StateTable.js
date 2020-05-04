@@ -6,7 +6,7 @@ import DataTable from 'react-data-table-component';
 import { Modal, ModalBody, ModalHeader, Button, ModalFooter } from 'reactstrap';
 import './StateTable.css';
 import $ from 'jquery';
-import { Bar, Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 class StateTable extends Component {
 
@@ -174,9 +174,6 @@ class StateTable extends Component {
 		);
 	}
 }
-const doNothing = () => {
-	return 1;
-}
 const ExpanableComponent = ({ data, items, zone }) => {
 
 	const ExpanableComponent = ({ data, zone }) => {
@@ -188,16 +185,16 @@ const ExpanableComponent = ({ data, items, zone }) => {
 			return 1;
 		});
 		const displayZone = () => {
-			if (districtZone['zone'] == "Red") {
+			if (districtZone['zone'] === "Red") {
 				return (
 					<span className="text-danger"> {districtZone['zone']}</span>
 				);
-			} else if (districtZone['zone'] == "Orange") {
+			} else if (districtZone['zone'] === "Orange") {
 				return (
 					<span className="text-orange"> {districtZone['zone']}</span>
 				);
 			}
-			else if (districtZone['zone'] == "Green") {
+			else if (districtZone['zone'] === "Green") {
 				return (
 					<span className="text-success"> {districtZone['zone']}</span>
 				);
@@ -325,7 +322,7 @@ const ExpanableComponent = ({ data, items, zone }) => {
 			position: 'top'
 		}
 	};
-	var districtResult = [], districtResultName = [], districtResultActive = [], districtResultDeath = [], districtResultRecovered = [], districtResultConfirmed = [], districtResultTodays = [];
+	var districtResult = [], districtResultName = [], districtResultActive = [], districtResultDeath = [], districtResultRecovered = [], districtResultConfirmed = [];
 	if (districtArr['districtData'] !== undefined) {
 		districtResult = districtArr['districtData'].slice();
 		districtResult.sort(

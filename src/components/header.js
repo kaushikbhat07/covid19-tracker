@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, Collapse, Modal, ModalBody, ModalFooter, ModalHeader, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
@@ -58,7 +58,7 @@ class TopNav extends Component {
 					<ModalBody>
 						<h5>Data is collected from various sources & It changes rapidly.</h5>
 						<p>
-							This data changes rapidly, so what’s shown may be out of date. Table values may not always be 100% accurate. Information about reported cases is also available on the <a href="https://who.in" target="_blank">World Health Organization</a> & <a href="https://worldometers.info" target="_blank">worldoMeters.info</a>
+							This data changes rapidly, so what’s shown may be out of date. Table values may not always be 100% accurate. Information about reported cases is also available on the <a href="https://who.in" target="_blank" rel="noopener noreferrer">World Health Organization</a> & <a href="https://worldometers.info" target="_blank" rel="noopener noreferrer">worldoMeters.info</a>
 						</p>
 						<h5>It doesn’t include all cases</h5>
 						<p>

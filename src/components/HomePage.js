@@ -242,6 +242,7 @@ class HomePage extends Component {
 						if (param['country'] === "India") {
 							testsArr.push(param);
 						}
+						return 1;
 					})
 					this.setState({
 						testsmillion: {
