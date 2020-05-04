@@ -145,9 +145,9 @@ class StateTable extends Component {
 		}
 		return (
 			<div className="mb-4">
-				<div className="mb-4">
+				<div className="mb-4 of-hidden">
 					<h3 className="">State-wise count</h3>
-					<span className="text-muted">Click on your state in the below table to check if your district lies in the <span className="text-danger">Red zone</span></span>
+					<p className="text-muted animated infinite heartBeat delay-1s slow">Click on your state in the below table to check if your district lies in the <span className="text-danger">Red zone</span></p>
 				</div>
 				<Card className="shadow">
 					<CardBody>

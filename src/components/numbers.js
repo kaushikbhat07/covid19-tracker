@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import { FadeTransform } from 'react-animation-components';
 
 class Numbers extends Component {
 	constructor(props) {
@@ -90,7 +92,7 @@ class Numbers extends Component {
 		}
 		const todayCasesIndia = () => {
 			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null && this.props.indiaisLoaded === true && this.props.indiaItems !== null) {
-				if(parseInt(this.state.todaycases.items['todayCases']) > 0) {
+				if (parseInt(this.state.todaycases.items['todayCases']) > 0) {
 					return (
 						<sup className="text-danger">(+{this.state.todaycases.items['todayCases'].toLocaleString()})</sup>
 					);
@@ -103,7 +105,7 @@ class Numbers extends Component {
 		}
 		const todayDeathsIndia = () => {
 			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null && this.props.indiaisLoaded === true && this.props.indiaItems !== null) {
-				if(parseInt(this.state.todaycases.items['todayDeaths']) > 0) {
+				if (parseInt(this.state.todaycases.items['todayDeaths']) > 0) {
 					return (
 						<sup className="text-danger">(+{this.state.todaycases.items['todayDeaths'].toLocaleString()})</sup>
 					);
@@ -238,6 +240,11 @@ class Numbers extends Component {
 			}
 		}
 		return (
+			<FadeTransform
+			in
+			transformProps={{
+				exitTransform: 'scale(0.5) translateY(-50%)'
+			}}>
 			<div className="numbers-data">
 				<div class="row">
 					<div className="col-md-12">
@@ -289,7 +296,9 @@ class Numbers extends Component {
 
 				<div class="row">
 					<div className="col-md-12">
-						<h3>Coronavirus cases - India</h3><span className="text-muted">Last updated: {convertIndianDate()}</span>
+						<div className="d-flex view-more-india"><h3>Coronavirus cases - India</h3>
+							<h6 className="animated infinite heartBeat"><NavLink to="/india">View more</NavLink></h6></div>
+						<span className="text-muted">Last updated: {convertIndianDate()}</span>
 					</div>
 				</div>
 				<div className="row mt-3">
@@ -335,6 +344,7 @@ class Numbers extends Component {
 					</div>
 				</div>
 			</div>
+			</FadeTransform>
 		);
 	}
 }

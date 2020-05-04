@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FadeTransform } from 'react-animation-components';
 
 class Numbers extends Component {
 	constructor(props) {
@@ -89,7 +90,7 @@ class Numbers extends Component {
 		}
 		const todayCasesIndia = () => {
 			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null && this.props.isLoaded === true && this.props.items !== null) {
-				if(parseInt(this.state.todaycases.items['todayCases']) > 0) {
+				if (parseInt(this.state.todaycases.items['todayCases']) > 0) {
 					return (
 						<sup className="text-danger">(+{this.state.todaycases.items['todayCases'].toLocaleString()})</sup>
 					);
@@ -102,7 +103,7 @@ class Numbers extends Component {
 		}
 		const todayDeathsIndia = () => {
 			if (this.state.todaycases.isLoaded === true && this.state.todaycases.error === null && this.props.isLoaded === true && this.props.items !== null) {
-				if(parseInt(this.state.todaycases.items['todayDeaths']) > 0) {
+				if (parseInt(this.state.todaycases.items['todayDeaths']) > 0) {
 					return (
 						<sup className="text-danger">(+{this.state.todaycases.items['todayDeaths'].toLocaleString()})</sup>
 					);
@@ -174,55 +175,61 @@ class Numbers extends Component {
 			}
 		}
 		return (
-			<div className="numbers-data">
-				<div class="row">
-					<div className="col-md-12">
-						<h3>Coronavirus cases - India</h3><span className="text-muted">Last updated: {convertIndianDate()}</span>
+			<FadeTransform
+				in
+				transformProps={{
+					exitTransform: 'scale(0.5) translateY(-50%)'
+				}}>
+				<div className="numbers-data">
+					<div class="row">
+						<div className="col-md-12">
+							<h3>Coronavirus cases - India</h3><span className="text-muted">Last updated: {convertIndianDate()}</span>
+						</div>
+					</div>
+					<div className="row mt-3">
+						<div class="col-md-4 mb-4">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-uppercase mb-1">Total Infected</div>
+											<div class="h5 mb-0 font-weight-numbers text-primary">{totalInfectedIndia()}
+												{todayCasesIndia()}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4 mb-4">
+							<div class="card border-left-success shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-uppercase mb-1">Total Recovered</div>
+											<div class="h5 mb-0 font-weight-numbers text-success">{totalReceoveredIndia()}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4 mb-4">
+							<div class="card border-left-danger shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-uppercase mb-1">Total Deaths</div>
+											<div class="h5 mb-0 font-weight-numbers text-danger">{totalDeadIndia()}
+												{todayDeathsIndia()}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div className="row mt-3">
-					<div class="col-md-4 mb-4">
-						<div class="card border-left-primary shadow h-100 py-2">
-							<div class="card-body">
-								<div class="row no-gutters align-items-center">
-									<div class="col mr-2">
-										<div class="text-xs font-weight-bold text-uppercase mb-1">Total Infected</div>
-										<div class="h5 mb-0 font-weight-numbers text-primary">{totalInfectedIndia()}
-											{todayCasesIndia()}</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-4 mb-4">
-						<div class="card border-left-success shadow h-100 py-2">
-							<div class="card-body">
-								<div class="row no-gutters align-items-center">
-									<div class="col mr-2">
-										<div class="text-xs font-weight-bold text-uppercase mb-1">Total Recovered</div>
-										<div class="h5 mb-0 font-weight-numbers text-success">{totalReceoveredIndia()}</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-4 mb-4">
-						<div class="card border-left-danger shadow h-100 py-2">
-							<div class="card-body">
-								<div class="row no-gutters align-items-center">
-									<div class="col mr-2">
-										<div class="text-xs font-weight-bold text-uppercase mb-1">Total Deaths</div>
-										<div class="h5 mb-0 font-weight-numbers text-danger">{totalDeadIndia()}
-											{todayDeathsIndia()}</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			</FadeTransform>
 		);
 	}
 }

@@ -163,3 +163,12 @@ h3 {
 .nav-link.active {
 	font-weight: 700;
 }
+.of-hidden {
+	overflow: hidden;
+}
+.d-inline {
+	display: flex;
+}
+.view-more-india {
+	justify-content: space-between;
+}

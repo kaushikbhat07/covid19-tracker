@@ -7,6 +7,7 @@ import './sbadmin.css';
 import './index.css';
 import './loader';
 import App from './App';
+import 'animate.css/animate.css';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

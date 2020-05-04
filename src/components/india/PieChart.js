@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardText } from 'reactstrap';
 import { Pie } from 'react-chartjs-2';
+import { FadeTransform } from 'react-animation-components';
+
 class PieChart extends Component {
 	constructor(props) {
 		super(props);
@@ -44,13 +46,19 @@ class PieChart extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Card className="shadow">
-					<CardBody>
-						<CardText>
-							{this.printChart()}
-						</CardText>
-					</CardBody>
-				</Card>
+				<FadeTransform
+					in
+					transformProps={{
+						exitTransform: 'scale(0.5) translateY(-50%)'
+					}}>
+					<Card className="shadow">
+						<CardBody>
+							<CardText>
+								{this.printChart()}
+							</CardText>
+						</CardBody>
+					</Card>
+				</FadeTransform>
 			</React.Fragment>
 		);
 	}
