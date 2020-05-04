@@ -79,15 +79,24 @@ class HomePage extends Component {
 			.then(res => res.json())
 			.then(
 				result => {
+					var a, dateHistory = [];
+					var d = new Date();
+					a = Object.keys(result['cases']);
+
+					for (let index = 0; index < a.length; index++) {
+						d = new Date(a[index]).toDateString();
+						d.split(' ');
+						dateHistory.push(d.slice(4, 10));
+					}
 					if (result['cases'] !== undefined) {
 						this.setState({
 							worldHistory: {
 								isLoaded: true,
 								error: null,
-								dates: Object.keys(result['cases']),
+								dates: dateHistory[0],
 								confirmed: Object.values(result['cases']),
 								data: {
-									labels: Object.keys(result['cases']),
+									labels: dateHistory,
 									datasets: [{
 										label: 'Confirmed cases',
 										fill: false,

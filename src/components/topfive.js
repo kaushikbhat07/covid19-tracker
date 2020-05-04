@@ -46,7 +46,10 @@ class TopFive extends Component {
 		return (
 			<React.Fragment>
 				<div className="mb-4">
-					<h3 className="all-country-title">Most effected Nations</h3>
+					<div className="mb-4">
+						<h3 className="">Most affected countries</h3>
+						<span className="text-muted">Click on any label to hide it from the chart.</span>
+					</div>
 					<Card className="shadow">
 						<CardBody>
 							<CardText>

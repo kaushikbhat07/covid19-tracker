@@ -234,14 +234,14 @@ class Numbers extends Component {
 				dateString = dateString.split(' ').slice(0, 5).join(' ');
 				return (dateString);
 			} else {
-				loader();
+				return (<span></span>)
 			}
 		}
 		return (
 			<div className="numbers-data">
 				<div class="row">
 					<div className="col-md-12">
-						<h3>Covid19 cases - Global</h3><span className="text-muted">Last updated: {convertGlobalTime()}</span>
+						<h3>Coronavirus cases - Global</h3><span className="text-muted">Last updated: {convertGlobalTime()}</span>
 					</div>
 				</div>
 				<div className="row mt-3">
@@ -251,7 +251,7 @@ class Numbers extends Component {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="text-xs font-weight-bold text-uppercase mb-1">Total Infected</div>
-										<div class="h5 mb-0 font-weight-bold text-primary">
+										<div class="h5 mb-0 font-weight-numbers text-primary">
 											{totalInfectedGlobal()}
 										</div>
 									</div>
@@ -266,7 +266,7 @@ class Numbers extends Component {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="text-xs font-weight-bold text-uppercase mb-1">Total Recovered</div>
-										<div class="h5 mb-0 font-weight-bold text-success">{totalRecoveredGlobal()}</div>
+										<div class="h5 mb-0 font-weight-numbers text-success">{totalRecoveredGlobal()}</div>
 									</div>
 								</div>
 							</div>
@@ -279,7 +279,7 @@ class Numbers extends Component {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="text-xs font-weight-bold text-uppercase mb-1">Total Deaths</div>
-										<div class="h5 mb-0 font-weight-bold text-danger">{totalDeadGlobal()}</div>
+										<div class="h5 mb-0 font-weight-numbers text-danger">{totalDeadGlobal()}</div>
 									</div>
 								</div>
 							</div>
@@ -289,7 +289,7 @@ class Numbers extends Component {
 
 				<div class="row">
 					<div className="col-md-12">
-						<h3>Covid19 cases - India</h3><span className="text-muted">Last updated: {convertIndianDate()}</span>
+						<h3>Coronavirus cases - India</h3><span className="text-muted">Last updated: {convertIndianDate()}</span>
 					</div>
 				</div>
 				<div className="row mt-3">
@@ -299,7 +299,7 @@ class Numbers extends Component {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="text-xs font-weight-bold text-uppercase mb-1">Total Infected</div>
-										<div class="h5 mb-0 font-weight-bold text-primary">{totalInfectedIndia()}
+										<div class="h5 mb-0 font-weight-numbers text-primary">{totalInfectedIndia()}
 											{todayCasesIndia()}</div>
 									</div>
 								</div>
@@ -313,7 +313,7 @@ class Numbers extends Component {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="text-xs font-weight-bold text-uppercase mb-1">Total Recovered</div>
-										<div class="h5 mb-0 font-weight-bold text-success">{totalReceoveredIndia()}</div>
+										<div class="h5 mb-0 font-weight-numbers text-success">{totalReceoveredIndia()}</div>
 									</div>
 								</div>
 							</div>
@@ -326,7 +326,7 @@ class Numbers extends Component {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div class="text-xs font-weight-bold text-uppercase mb-1">Total Deaths</div>
-										<div class="h5 mb-0 font-weight-bold text-danger">{totalDeadIndia()}
+										<div class="h5 mb-0 font-weight-numbers text-danger">{totalDeadIndia()}
 											{todayDeathsIndia()}</div>
 									</div>
 								</div>

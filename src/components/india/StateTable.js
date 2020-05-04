@@ -145,7 +145,10 @@ class StateTable extends Component {
 		}
 		return (
 			<div className="mb-4">
-				<h3 className="all-country-title">State-wise count</h3>
+				<div className="mb-4">
+					<h3 className="">State-wise count</h3>
+					<span className="text-muted">Click on your state in the below table to check if your district lies in the <span className="text-danger">Red zone</span></span>
+				</div>
 				<Card className="shadow">
 					<CardBody>
 						{loader()}
@@ -314,7 +317,7 @@ const ExpanableComponent = ({ data, items, zone }) => {
 		maintainAspectRatio: false,
 		title: {
 			display: true,
-			text: 'Comparision among districts (Top 10)',
+			text: 'Comparision among districts (Top 5)',
 			fontSize: 18
 		},
 		legend: {
@@ -331,8 +334,8 @@ const ExpanableComponent = ({ data, items, zone }) => {
 			}
 		);
 	}
-	if(districtResult.length > 10) {
-		for (let index = 0; index < 10; index++) {
+	if (districtResult.length > 5) {
+		for (let index = 0; index < 5; index++) {
 			districtResultName.push(districtResult[index]['district']);
 			districtResultActive.push(districtResult[index]['active']);
 			districtResultDeath.push(districtResult[index]['deceased']);
@@ -375,7 +378,10 @@ const ExpanableComponent = ({ data, items, zone }) => {
 		<div className="district-modal-btn">
 			<Button onClick={toggle} className="btn-sm ">Click here</Button> for district-level data of {data.state}
 			<Modal fade={false} isOpen={modal} toggle={toggle} external={externalCloseBtn}>
-				<ModalHeader toggle={toggle}>{data.state}</ModalHeader>
+				<ModalHeader toggle={toggle}>
+					<h3>{data.state}</h3>
+					<span className="text-muted">Last updated: {data.lastupdatedtime}</span>
+				</ModalHeader>
 				<ModalBody>
 					<div className="row mt-3">
 						<div class="col-md-4 mb-4">
@@ -384,7 +390,7 @@ const ExpanableComponent = ({ data, items, zone }) => {
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-uppercase mb-1">Total Infected</div>
-											<div class="h5 mb-0 font-weight-bold text-primary">{data.confirmed.toLocaleString()} {printTodayConfirmed()}</div>
+											<div class="h5 mb-0 font-weight-numbers text-primary">{data.confirmed.toLocaleString()} {printTodayConfirmed()}</div>
 										</div>
 									</div>
 								</div>
@@ -397,7 +403,7 @@ const ExpanableComponent = ({ data, items, zone }) => {
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-uppercase mb-1">Total Recovered</div>
-											<div class="h5 mb-0 font-weight-bold text-success">{(data.recovered).toLocaleString()} {printTodayRecovered()}</div>
+											<div class="h5 mb-0 font-weight-numbers text-success">{(data.recovered).toLocaleString()} {printTodayRecovered()}</div>
 										</div>
 									</div>
 								</div>
@@ -410,20 +416,18 @@ const ExpanableComponent = ({ data, items, zone }) => {
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-uppercase mb-1">Total Deaths</div>
-											<div class="h5 mb-0 font-weight-bold text-danger">{data.deaths} {printTodayDeaths()}</div>
+											<div class="h5 mb-0 font-weight-numbers text-danger">{data.deaths} {printTodayDeaths()}</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div className="col-12">
-							<span className="text-muted">Last updated: {data.lastupdatedtime}</span>
-						</div>
 					</div>
-
+					<h5>District-wise count</h5>
+					<span className="text-muted">Select your district below to check if your district lies in the <span className="text-danger">Red zone</span>. Scroll down futher to see <span className="text-success">Green zone</span> districts</span>
 					<DataTable
 						keyField='id1'
-						title="District-wise count"
+						// title="District-wise count"
 						columns={columnsDistrict}
 						data={districtArr['districtData']}
 						pagination="true"
@@ -436,9 +440,11 @@ const ExpanableComponent = ({ data, items, zone }) => {
 						paginationRowsPerPageOptions={paginationRows}
 						pointerOnHover="true"
 					/>
+					<h5>{data.state} district zones</h5>
+					<span className="text-muted">Zone data of all districts (includes <span className="text-success">green zones</span>)</span>
 					<DataTable
 						keyField='id2'
-						title={data.state + " district zones"}
+						// title={data.state + " district zones"}
 						columns={columnsDistrictZones}
 						data={zoneArr}
 						pagination="true"
@@ -457,7 +463,8 @@ const ExpanableComponent = ({ data, items, zone }) => {
 					<div className="row mt-5">
 						<div className="col-12">
 							<div className="mb-3">
-								<h5>Highly affected districts in {data.state}</h5>
+								<h5>Most affected districts in {data.state}</h5>
+								<span className="text-muted">Click on any label below to hide it from the chart</span>
 							</div>
 							<Card className="shadow">
 								<CardBody>

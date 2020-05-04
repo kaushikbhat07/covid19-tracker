@@ -45,7 +45,7 @@ class TopFiveBarChart extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className="mb-4">
+                <div className="">
                     <Card className="shadow">
                         <CardBody>
                             <CardText>

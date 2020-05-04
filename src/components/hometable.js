@@ -33,7 +33,7 @@ class HomeTable extends Component {
 			$('table').addClass('table-responsive-lg').removeClass('table-bordered');
 			// CSS
 			$('table').css({ "width": "100%", "position": "relative", "overflow-y": "scroll" });
-			$('.react-bootstrap-table').css({"max-height": "400px", "overflow-y": "scroll" });
+			$('.react-bootstrap-table').css({ "max-height": "400px", "overflow-y": "scroll" });
 			if ($(window).width() < 576) {
 				$('#pageDropDown').addClass('mt-3 mb-3');
 			}
@@ -64,7 +64,10 @@ class HomeTable extends Component {
 		}
 		return (
 			<div className="mb-4">
-				<h3 className="all-country-title">All Countries</h3>
+				<div className="mb-4">
+					<h3 className="">Affected countries</h3>
+					<span className="text-muted">Click on any column to sort the data accordingly</span>
+				</div>
 				<Card className="shadow">
 					<CardBody>
 						{loader()}

@@ -47,7 +47,7 @@ class WorldTrend extends Component {
 	displayDate() {
 		if (this.props.dates !== null) {
 			return (
-				this.props.dates[0]
+				this.props.dates
 			);
 		}
 	}

@@ -32,20 +32,23 @@ class TopNav extends Component {
 		return (
 			<div>
 				<Navbar color="light" light expand="md" className="shadow fixed-top">
-					<NavbarBrand href="/">
-						<img src="assets/images/logo.png" alt="Covid-19 Logo" />
-					</NavbarBrand>
+					<div className="navbar-heading">
+						<NavbarBrand href="/">
+							<img src="assets/images/logo.png" alt="Covid-19 Logo" />
+						</NavbarBrand>
+						<h1 className="navbar-brand-name">Covid - 19 Tracker</h1>
+					</div>
 					<NavbarToggler onClick={this.toggle} />
-					<Collapse isOpen={this.state.isNavOpen} navbar center>
-						<Nav className="text-center icons-right" navbar>
+					<Collapse isOpen={this.state.isNavOpen} navbar center className="icons-right">
+						<Nav className="text-center" navbar>
 							<NavItem>
-								<NavLink onClick={this.toggle} className="nav-link" to="/dashboard"><span className="fa fa-info-circle"></span></NavLink>
+								<NavLink onClick={this.toggle} className="nav-link" to="/dashboard">Dashboard&nbsp;<span className="fa fa-table"></span></NavLink>
 							</NavItem>
 							<NavItem>
-								<NavLink onClick={this.toggle} className="nav-link" to="/india"><span className="fa fa-home"></span></NavLink>
+								<NavLink onClick={this.toggle} className="nav-link" to="/india">India&nbsp;<span className="fa fa-home"></span></NavLink>
 							</NavItem>
 							<NavItem onClick={this.toggleModal}>
-								<a className="nav-link"><span className="fa fa-question-circle"></span></a>
+								<a className="nav-link">About&nbsp;<span className="fa fa-question-circle"></span></a>
 							</NavItem>
 						</Nav>
 					</Collapse>

@@ -1,17 +1,18 @@
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+	/* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
 		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-		sans-serif;
+		sans-serif; */
+	font-family: 'Montserrat', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-		monospace;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
 }
-
+h3 {
+	font-weight: 600;
+}
 /* CUSTOM */
 .container-wrapper {
 	padding-top: 68px;
@@ -102,16 +103,18 @@ tbody > tr td:nth-child(4) {
 	color: #28a745;
 } */
 .nav-link {
-	font-size: 23px;
+	font-size: 20px;
 	margin: 0px 5px;
+	font-family: 'Raleway', sans-serif;
 }
 
-@media screen and (min-width: 767px) {
+/* @media screen and (min-width: 767px) { */
 	.icons-right {
-		margin-left: 85%;
-		margin-right: 5%;
+		justify-content: right;
+		justify-content: end;
+		justify-content: flex-end;
 	}
-}
+/* } */
 @media screen and (min-width: 767px) and (max-width: 992px) {
 	.container-wrapper {
 		max-width: 990px;
@@ -135,4 +138,28 @@ tbody > tr td:nth-child(4) {
 }
 .text-orange {
 	color: #fb5607;
+}
+.font-weight-numbers {
+	font-weight: 600;
+}
+h3 {
+	font-size: 24px;
+}
+.text-muted {
+	font-size: 14px !important;
+}
+.navbar-heading {
+	display: flex;
+	align-items: center;
+}
+.navbar-brand-name {
+	font-size: 24px;
+	font-weight: 300;
+}
+.nav-link {
+	font-size: 14px;
+	font-weight: 500;
+}
+.nav-link.active {
+	font-weight: 700;
 }
