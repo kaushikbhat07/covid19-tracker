@@ -6,6 +6,7 @@ import DataTable from 'react-data-table-component';
 import { Modal, ModalBody, ModalHeader, Button, ModalFooter } from 'reactstrap';
 import './StateTable.css';
 import $ from 'jquery';
+import { Bar, Line } from 'react-chartjs-2';
 
 class StateTable extends Component {
 
@@ -309,6 +310,67 @@ const ExpanableComponent = ({ data, items, zone }) => {
 			);
 		}
 	}
+	const chartOptions = {
+		maintainAspectRatio: false,
+		title: {
+			display: true,
+			text: 'Comparision among districts (Top 10)',
+			fontSize: 18
+		},
+		legend: {
+			display: true,
+			position: 'top'
+		}
+	};
+	var districtResult = [], districtResultName = [], districtResultActive = [], districtResultDeath = [], districtResultRecovered = [], districtResultConfirmed = [], districtResultTodays = [];
+	if (districtArr['districtData'] !== undefined) {
+		districtResult = districtArr['districtData'].slice();
+		districtResult.sort(
+			function (a, b) {
+				return b['confirmed'] - a['confirmed'];
+			}
+		);
+	}
+	if(districtResult.length > 10) {
+		for (let index = 0; index < 10; index++) {
+			districtResultName.push(districtResult[index]['district']);
+			districtResultActive.push(districtResult[index]['active']);
+			districtResultDeath.push(districtResult[index]['deceased']);
+			districtResultRecovered.push(districtResult[index]['recovered']);
+			districtResultConfirmed.push(districtResult[index]['confirmed']);
+		}
+	} else {
+		for (let index = 0; index < districtResult.length; index++) {
+			districtResultName.push(districtResult[index]['district']);
+			districtResultActive.push(districtResult[index]['active']);
+			districtResultDeath.push(districtResult[index]['deceased']);
+			districtResultRecovered.push(districtResult[index]['recovered']);
+			districtResultConfirmed.push(districtResult[index]['confirmed']);
+		}
+	}
+	const chartData = {
+		labels: districtResultName,
+		datasets: [
+			{
+				label: "Active Cases",
+				backgroundColor: 'rgba(5, 130, 202,0.7)',
+				hoverBackgroundColor: 'rgba(5, 130, 202,0.9)',
+				data: districtResultActive
+			},
+			{
+				label: "Death Cases",
+				backgroundColor: 'rgba(214, 40, 40,0.7)',
+				hoverBackgroundColor: 'rgba(214, 40, 40,0.9)',
+				data: districtResultDeath
+			},
+			{
+				label: "Recovery Cases",
+				backgroundColor: 'rgba(26, 67, 1,0.7)',
+				hoverBackgroundColor: 'rgba(26, 67, 1,0.9)',
+				data: districtResultRecovered
+			}
+		]
+	}
 	return (
 		<div className="district-modal-btn">
 			<Button onClick={toggle} className="btn-sm ">Click here</Button> for district-level data of {data.state}
@@ -391,6 +453,18 @@ const ExpanableComponent = ({ data, items, zone }) => {
 					/>
 					<div className="text-center mt-3">
 						<a className="btn btn-primary btn-sm text-light" target="_blank" rel="noopener noreferrer" href="https://www.indiatoday.in/information/story/coronavirus-centre-issues-state-wise-division-of-red-orange-and-green-zone-here-s-how-they-will-differ-1673222-2020-05-01">Click here <i className="fa fa-external-link"></i></a> to know what these <span className="text-danger">zones</span> mean.
+					</div>
+					<div className="row mt-5">
+						<div className="col-12">
+							<div className="mb-3">
+								<h5>Highly affected districts in {data.state}</h5>
+							</div>
+							<Card className="shadow">
+								<CardBody>
+									<Bar data={chartData} options={chartOptions} height="450"></Bar>
+								</CardBody>
+							</Card>
+						</div>
 					</div>
 				</ModalBody>
 				<ModalFooter>

@@ -191,12 +191,6 @@ class ContinentChart extends Component {
 			var dateString = new Date(dateIST).toUTCString();
 			dateString = dateString.split(' ').slice(0, 5).join(' ');
 			return (dateString);
-		} else {
-			return (
-				<div className="text-center">
-					<img alt="Loading..." src="assets/images/loader.gif" />
-				</div>
-			);
 		}
 	}
 	render() {

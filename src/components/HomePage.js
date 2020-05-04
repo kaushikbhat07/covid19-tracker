@@ -7,6 +7,7 @@ import TopFiveBarChart from './TopFiveBarChart';
 import LineChart from './LineChart';
 import ContinentChart from './ContinentChart';
 import TestsMillion from './TestsMillion';
+import WorldTrend from './WorldTrend';
 
 class HomePage extends Component {
 	constructor(props) {
@@ -47,6 +48,23 @@ class HomePage extends Component {
 			testsmillion: {
 				isLoaded: false,
 				error: null,
+			},
+			worldHistory: {
+				isLoaded: false,
+				error: null,
+				dates: null,
+				confirmed: null,
+				data: []
+			},
+			worldDeathHistory: {
+				isLoaded: false,
+				error: null,
+				data: []
+			},
+			worldRecoveredHistory: {
+				isLoaded: false,
+				error: null,
+				data: []
 			}
 		}
 	}
@@ -54,8 +72,72 @@ class HomePage extends Component {
 		this.getGlobalData();
 		this.getIndianData();
 		this.getCountriesData();
+		this.getWorldHistory();
 	}
-
+	getWorldHistory() {
+		fetch("https://corona.lmao.ninja/v2/historical/all")
+			.then(res => res.json())
+			.then(
+				result => {
+					if (result['cases'] !== undefined) {
+						this.setState({
+							worldHistory: {
+								isLoaded: true,
+								error: null,
+								dates: Object.keys(result['cases']),
+								confirmed: Object.values(result['cases']),
+								data: {
+									labels: Object.keys(result['cases']),
+									datasets: [{
+										label: 'Confirmed cases',
+										fill: false,
+										lineTension: 0.5,
+										backgroundColor: '#fff',
+										hoverBackgroundColor: '#007bff',
+										borderColor: '#007bff',
+										data: Object.values(result['cases'])
+									},
+									{
+										label: 'Recobvery cases',
+										fill: false,
+										lineTension: 0.5,
+										backgroundColor: '#fff',
+										hoverBackgroundColor: '#3e8914',
+										borderColor: '#3e8914',
+										data: Object.values(result['recovered'])
+									},
+									{
+										label: 'Death cases',
+										fill: false,
+										lineTension: 0.5,
+										backgroundColor: '#fff',
+										hoverBackgroundColor: '#d62828',
+										borderColor: '#d62828',
+										data: Object.values(result['deaths'])
+									}
+									]
+								}
+							}
+						})
+					}
+				},
+				error => {
+					this.getWorldHistory();
+					this.setState({
+						worldHistory: {
+							isLoaded: false,
+							error: error,
+							data: null
+						},
+						worldDeathHistory: {
+							isLoaded: false,
+							error: error,
+							data: null
+						}
+					});
+				}
+			)
+	}
 	getIndianData() {
 		fetch("https://api.covid19india.org/data.json")
 			.then(res => res.json())
@@ -322,6 +404,9 @@ class HomePage extends Component {
 				</div>
 				<div className="content-box-md">
 					<TestsMillion isLoaded={this.state.testsmillion.isLoaded} error={this.state.testsmillion.error} data={this.state.testsmillion.data} date={this.state.testsmillion.date} />
+				</div>
+				<div className="content-box-md">
+					<WorldTrend isLoaded={this.state.worldHistory.isLoaded} error={this.state.worldHistory.error} dates={this.state.worldHistory.dates} data={this.state.worldHistory.data} deaths={this.state.worldDeathHistory.data} recovered={this.state.worldRecoveredHistory.data} />
 				</div>
 				<div className="row content-box-md">
 					<ContinentChart />

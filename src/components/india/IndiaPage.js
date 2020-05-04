@@ -4,7 +4,8 @@ import PieChart from './PieChart';
 import SamplesTested from './SamplesTested';
 import StateTable from './StateTable';
 import TopFiveState from './TopFiveState';
-import TopFiveBarGraph from './TopFiveLineGraph';
+import TopFiveLineGraph from './TopFiveLineGraph';
+import IndianTrend from './IndianTrend';
 
 class IndiaPage extends Component {
 	constructor(props) {
@@ -38,6 +39,10 @@ class IndiaPage extends Component {
 			linechart: {
 				isLoaded: false,
 				error: null
+			},
+			indiaTrend: {
+				isLoaded: false,
+				error: null
 			}
 		}
 	}
@@ -67,7 +72,13 @@ class IndiaPage extends Component {
 							arrStatewise[index]['confirmed'] = parseInt(arrStatewise[index]['confirmed']); arrStatewise[index]['deaths'] = parseInt(arrStatewise[index]['deaths']);
 							arrStatewise[index]['recovered'] = parseInt(arrStatewise[index]['recovered']);
 						}
-
+						var trendDates = [], trendConfirmed = [], trendDeaths = [], trendRecovered = [];
+						result['cases_time_series'].map((sub) => {
+							trendDates.push(sub['date']);
+							trendConfirmed.push(sub['totalconfirmed']);
+							trendDeaths.push(sub['totaldeceased']);
+							trendRecovered.push(sub['totalrecovered']);
+						})
 						this.setState({
 							numbers: {
 								items: result['cases_time_series'][result['cases_time_series'].length - 1],
@@ -145,6 +156,42 @@ class IndiaPage extends Component {
 								},
 								isLoaded: true,
 								error: null
+							},
+							indiaTrend: {
+								data: {
+									labels: trendDates,
+									datasets: [{
+										label: 'Confirmed cases',
+										fill: false,
+										lineTension: 0.5,
+										backgroundColor: '#007bff',
+										hoverBackgroundColor: '#007bff',
+										borderColor: '#007bff',
+										data: trendConfirmed
+									},
+									{
+										label: 'Death cases',
+										fill: false,
+										lineTension: 0.5,
+										backgroundColor: '#d62828',
+										hoverBackgroundColor: '#d62828',
+										borderColor: '#d62828',
+										data: trendDeaths
+									},
+									{
+										label: 'Recovery cases',
+										fill: false,
+										lineTension: 0.5,
+										backgroundColor: '#3e8914',
+										hoverBackgroundColor: '#3e8914',
+										borderColor: '#3e8914',
+										data: trendRecovered
+									},
+									]
+								},
+								dates: trendDates[0],
+								isLoaded: true,
+								error: null
 							}
 						});
 					}
@@ -173,6 +220,10 @@ class IndiaPage extends Component {
 							error: error
 						},
 						linechart: {
+							isLoaded: false,
+							error: error
+						},
+						indiaTrend: {
 							isLoaded: false,
 							error: error
 						}
@@ -208,9 +259,12 @@ class IndiaPage extends Component {
 				<div className="content-box-md">
 					<div className="row">
 						<div className="col-12 content-box-xs">
-							<TopFiveBarGraph data={this.state.linechart.data} isLoaded={this.state.linechart.isLoaded} error={this.state.linechart.error} />
+							<TopFiveLineGraph data={this.state.linechart.data} isLoaded={this.state.linechart.isLoaded} error={this.state.linechart.error} />
 						</div>
 					</div>
+				</div>
+				<div className="content-box-md">
+					<IndianTrend data={this.state.indiaTrend.data} isLoaded={this.state.indiaTrend.isLoaded} error={this.state.indiaTrend.error} dates={this.state.indiaTrend.dates} />
 				</div>
 			</div>
 		);
