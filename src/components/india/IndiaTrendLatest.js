@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardBody, CardText } from 'reactstrap';
 import { Bar, Line } from 'react-chartjs-2';
 
-class IndianTrend extends Component {
+class IndiaTrendLatest extends Component {
 	constructor(props) {
 		super(props);
 
@@ -12,7 +12,7 @@ class IndianTrend extends Component {
 					maintainAspectRatio: false,
 					title: {
 						display: true,
-						text: 'Covid-19 trend India',
+						text: 'Covid-19 trend India - past 30 days',
 						fontSize: 18
 					},
 					legend: {
@@ -57,7 +57,7 @@ class IndianTrend extends Component {
 				<div className="row mb-4">
 					<div className="col-12">
 						<div className="mb-4">
-							<h3>Covid-19 cases India timeline - All time</h3>
+							<h3>Covid-19 cases India timeline - Past 30 days</h3>
 							<span className="text-muted">Cases considered since: {this.displayDate()}</span>
 						</div>
 					</div>
@@ -76,4 +76,4 @@ class IndianTrend extends Component {
 	}
 }
 
-export default IndianTrend;
+export default IndiaTrendLatest;
