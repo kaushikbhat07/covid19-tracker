@@ -107,7 +107,7 @@ class HomePage extends Component {
 										data: Object.values(result['cases'])
 									},
 									{
-										label: 'Recobvery cases',
+										label: 'Recovery cases',
 										fill: false,
 										lineTension: 0.5,
 										backgroundColor: '#fff',

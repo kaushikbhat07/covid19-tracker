@@ -172,3 +172,8 @@ h3 {
 .view-more-india {
 	justify-content: space-between;
 }
+@media screen and (max-width: 767px) {
+	.navbar-brand-name {
+		font-size: 20px;
+	}
+}
