@@ -28,6 +28,11 @@ class Main extends Component {
 						</CSSTransition>
 					</TransitionGroup>
 					<Footer />
+					<div id="goto-top">
+						<a href="#home" className="text-dark goto-top-btn">
+							<i className="fa fa-angle-up"></i>
+						</a>
+					</div>
 				</div>
 			</div>
 		);
