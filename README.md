@@ -1,4 +1,10 @@
-Depolyed at: https://coronago.cf
+Deployed at: https://coronago.cf
+
+Screenshots:
+
+![image](https://user-images.githubusercontent.com/42489689/86814002-7942ad00-c09e-11ea-8f71-e37a36a3ab27.png)
+
+![image](https://user-images.githubusercontent.com/42489689/86814272-ccb4fb00-c09e-11ea-88d8-17c8f76c2be2.png)
 
 ## Available Scripts
 
